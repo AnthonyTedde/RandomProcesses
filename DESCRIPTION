@@ -1,0 +1,11 @@
+Package: RandomWalk
+Type: Package
+Title: Generate Random Walks
+Version: 0.1.0
+Author: Anthony Tedde
+Maintainer: The package maintainer <antho.tedde@gmail.com>
+Description: More about what it does (maybe more than one line)
+  In first place it provides possibility to generate random walk.
+License: GNU GPL
+Encoding: UTF-8
+LazyData: true
