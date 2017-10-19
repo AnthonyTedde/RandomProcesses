@@ -3,9 +3,8 @@ Type: Package
 Title: Generate Random Walks
 Version: 0.1.0
 Author: Anthony Tedde
-Maintainer: The package maintainer <antho.tedde@gmail.com>
-Description: More about what it does (maybe more than one line)
-  In first place it provides possibility to generate random walk.
-License: GNU GPL
+Maintainer: Anthony Tedde <antho.tedde@gmail.com>
+Description: In first place it provides possibility to generate random walk.
+License: GPL-2
 Encoding: UTF-8
 LazyData: true
