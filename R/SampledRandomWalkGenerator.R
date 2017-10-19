@@ -7,7 +7,7 @@
 #' @references
 #' [1] Symmetric Random Walk, Stochastic Calculus for Finance, Steven e. Shreve, 2004, pp 83-84
 #' @export
-randomWalkGenerator <- function(steps = 3000,
+sampledRandomWalkGenerator <- function(steps = 3000,
                                 prob = c('head' = 0.5, 'tail' = 0.5),
                                 n = 1){
 
