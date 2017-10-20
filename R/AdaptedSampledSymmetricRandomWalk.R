@@ -12,5 +12,8 @@
 adaptedSampledSymmetricRandomWalk <- function(steps = 3000,
                                      prob = c('head' = 0.5,
                                               'tail' = 0.5)){
-  adaptedSampledSymmetricRandomWalkGenerator(steps, prob, 1)[[1]]
+  symRandWalk <- adaptedSampledSymmetricRandomWalkGenerator(steps, prob, 1)[[1]]
+  class(symRandWalk) <- c(class(symRandWalk),
+                          "symmetricRandomWalk")
+  symRandWalk
 }
