@@ -21,10 +21,10 @@ library(RandomWalk)
 
 ## Functions provided by the package
 
-* adaptedSampledRandomWalkGenerator
-* adaptedSampledRandomWalk
-* sampleRandomWalk
-* sampleRandomWalkGenerator
+* [adaptedSampledRandomWalkGenerator](#adaptedsampledrandomwalkgenerator)
+* [adaptedSampledRandomWalk]()
+* [sampleRandomWalk]()
+* [sampleRandomWalkGenerator]()
 
 ```{r}
 adaptedSampledRandomWalkGenerator(steps = 3000,
