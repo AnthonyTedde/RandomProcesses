@@ -22,9 +22,9 @@ library(RandomWalk)
 ## Functions provided by the package
 
 * [adaptedSampledRandomWalkGenerator](#adaptedsampledrandomwalkgenerator)
-* [adaptedSampledRandomWalk](#adaptedSampledRandomWalk)
-* [sampleRandomWalk](#sampleRandomWalk)
-* [sampleRandomWalkGenerator](#sampleRandomWalkGenerator)
+* [adaptedSampledRandomWalk](#adaptedsampledrandomwalk)
+* [sampleRandomWalk](#samplerandomwalk)
+* [sampleRandomWalkGenerator](#samplerandomwalkgenerator)
 
 ## Description as being created and defined
 
