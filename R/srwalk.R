@@ -9,11 +9,11 @@
 #' @references
 #' [1] Symmetric Random Walk, Stochastic Calculus for Finance, Steven e. Shreve, 2004, pp 83-84
 #' @export
-adaptedSampledSymmetricRandomWalk <- function(steps = 3000,
+srwalk <- function(steps = 3000,
                                      prob = c('head' = 0.5,
                                               'tail' = 0.5)){
-  symRandWalk <- adaptedSampledSymmetricRandomWalkGenerator(steps, prob, 1)[[1]]
+  sampleRandomwalk <- srwalkGenerator(steps, prob, 1)[[1]]
   class(symRandWalk) <- c(class(symRandWalk),
                           "symmetricRandomWalk")
-  symRandWalk
+  sampleRandomwalk
 }

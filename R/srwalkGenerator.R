@@ -10,10 +10,29 @@
 #' @references
 #' [1] Symmetric Random Walk, Stochastic Calculus for Finance, Steven e. Shreve, 2004, pp 83-84
 #' @export
-adaptedSampledSymmetricRandomWalkGenerator <- function(steps = 3000,
-                                              prob = c('head' = 0.5,
-                                                       'tail' = 0.5),
-                                              n = 1){
-  sampledSymmetricRandomWalk <- sampledSymmetricRandomWalkGenerator(steps, prob, n)
-  lapply(sampledSymmetricRandomWalk, function(x){data.frame(0:(length(x) - 1), x)})
- }
+srwalkGenerator <- function(steps = 100,
+                            prob = c('head' = 0.5,
+                                     'tail' = 0.5),
+                            n = 1){
+
+  x <- rep(list(c(-1, 1)), n)
+
+  X <- lapply(x,
+              sample,
+              size = steps,
+              replace = T,
+              prob = prob)
+
+  Mk <- lapply(X, function(i){
+    c(0,
+      sapply(seq_along(i),
+             function(x){
+               sum(i[1:x])
+             })
+    )})
+
+  sampledRandomWalk <- as.data.frame(Mk)
+  (
+  lapply(sampledRandomWalk, function(x){data.frame(0:(length(x) - 1), x)})
+  )
+}
