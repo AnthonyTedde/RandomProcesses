@@ -10,7 +10,7 @@
 #' [1] Symmetric Random Walk, Stochastic Calculus for Finance, Steven e. Shreve, 2004, pp 83-84
 #' @export
 srwalk <- function(steps = 3000,
-                                     prob = c('head' = 0.5,
-                                              'tail' = 0.5)){
- srwalkGenerator(steps, prob, 1)[[1]]
+                   prob = c('head' = 0.5,
+                            'tail' = 0.5)){
+  srwalkGenerator(steps, prob, 1)[[1]]
 }
