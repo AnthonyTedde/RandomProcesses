@@ -32,7 +32,13 @@ srwalkGenerator <- function(steps = 100,
     )})
 
   sampledRandomWalk <- as.data.frame(Mk)
-  (
-  lapply(sampledRandomWalk, function(x){data.frame(0:(length(x) - 1), x)})
-  )
+
+  rwalkFactory <- function(x){
+    a <- data.frame(0:(length(x) - 1), x)
+    class(a) <- c(class(a), "randomwalk")
+    a
+  }
+
+  lapply(sampledRandomWalk, rwalkFactory )
+
 }
