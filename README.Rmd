@@ -24,7 +24,8 @@ library(RandomWalk)
 
 ## Functions provided by the package
 
-* Sampled radom walk: [srwalk]
+* Multiple sampled radom walk generator: [srwalk](#srwalkGenerator)
+* Sampled radom walk: [srwalk](#srwalk)
 * Theoretical radom walk: [trwalk]
 * Quadratic variation: [qvar]
 * Expectation of radom walk/brownian motion: [rwexp]
@@ -44,12 +45,12 @@ Instead it provides an brief descriptions of their arguments as they was defined
 along with the default value they take.
 
 ```{r}
-srwGenerator(steps = 3000,
-             prob = c('head' = .5, 'tail' = .5),
-             n = 1)
+srwalkGenerator(steps = 3000,
+                prob = c('head' = .5, 'tail' = .5),
+                n = 1)
 
-srw(steps = 3000,
-    prob = c('head' = .5, 'tail' = .5))
+srwalk(steps = 3000,
+       prob = c('head' = .5, 'tail' = .5))
 
 ```
   
@@ -57,7 +58,7 @@ srw(steps = 3000,
 ## Functions and arguments
 
  
-### srwGenerator
+### srwalkGenerator
 
  | Arguments | Description |
 |---|---|
@@ -81,7 +82,7 @@ library(RandomWalk)
 Sampled <- adaptedSampledRandomWalkGenerator(steps = 500, n = 20)
 ```
 
-### srw
+### srwalk
 
 | Arguments | Description |
 |---|---|
