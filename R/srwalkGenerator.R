@@ -57,6 +57,7 @@ srwalkGenerator <- function(time_to_maturity = 100,
   rwalkFactory <- function(x){
     a <- data.frame(step, x)
     class(a) <- c(class(a), "randomwalk")
+    names(a) <- c('time_periods', 'random_walk_path')
     a
   }
 
