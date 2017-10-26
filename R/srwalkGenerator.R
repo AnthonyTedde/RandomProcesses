@@ -17,6 +17,7 @@ srwalkGenerator <- function(time_to_maturity = 100,
                             n = 1){
 
   # set the whole time step ----------------------------
+  # TODO rename step -> partition
 
   step <- seq(from = 0,
               to = time_to_maturity,

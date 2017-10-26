@@ -3,8 +3,8 @@ Type: Package
 Title: Generate Random Walks
 Version: 0.1.0
 Date: 2017-10-19
-Author: Anthony Tedde
-Maintainer: Anthony Tedde <antho.tedde@gmail.com>
+Author@R: person('Anthony', 'Tedde', email = 'antho.tedde@gmail.com',
+                role = c('aut', 'cre'))
 Description: In first place it provides possibility to generate random walk.
 License: GPL-2
 Encoding: UTF-8
