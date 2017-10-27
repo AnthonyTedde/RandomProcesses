@@ -1,5 +1,7 @@
 # Random Walk R package (RandomWalk)
 
+## Introduction
+
 The aim of this package is to provide a way to create and manipulate simple random walk and brownian motion  or array of them. I would be noticed that the calculation
 of brownian motion is made by taking the limit of the random walk as its steps size
 goes to zero. The brownian motion could therefore be read as a continously stepped
@@ -14,6 +16,12 @@ probabilities is not taken into account.)
 
 (!) Quadratic variation should be seen as the volatility term of a random walk/
 brownian motion.
+
+### Notes
+
+**For more technical information and example of usage** of the RandomWalk package, 
+please feel free to have a look inside the [vignettes](/tree/master/vignettes) 
+repository.
 
 ## Load the package
 
