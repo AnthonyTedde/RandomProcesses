@@ -17,17 +17,19 @@ srwalkGenerator <- function(time_to_maturity = 100,
                             n = 1){
 
   # set the whole time step ----------------------------
+  # The following has just to be set up once because it is the same one that
+  # is used for all the random walk. Because all are indeed a different sample
+  # of the same random walk.
   # TODO rename step -> partition
-
   step <- seq(from = 0,
               to = time_to_maturity,
-              by = 1/n)
+              by = 1/scale)
+
   # All index (step * n) must be integer. Even it is probably not the optimal
   # way, I will round the value to get a sure integer value for (step * n)
   step <- round(step * 100) / 100
 
   # Define the path constant multiplier ----------------------------
-
   multiplier <- 1 / sqrt(scale)
 
   # Construction of the random variable ----------------------------
