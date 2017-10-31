@@ -13,5 +13,6 @@ RoxygenNote: 6.0.1
 Suggests: knitr,
     rmarkdown,
     ggplot2,
-    dplyr
+    dplyr,
+    testthat
 VignetteBuilder: knitr 
