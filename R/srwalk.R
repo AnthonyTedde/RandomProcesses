@@ -9,8 +9,15 @@
 #' @references
 #' [1] Symmetric Random Walk, Stochastic Calculus for Finance, Steven e. Shreve, 2004, pp 83-84
 #' @export
-srwalk <- function(steps = 3000,
+srwalk <- function(time_to_maturity = 100,
                    prob = c('head' = 0.5,
-                            'tail' = 0.5)){
-  srwalkGenerator(steps, prob, 1)[[1]]
+                            'tail' = 0.5),
+                   scale = 1){
+  # Call the generator ----------------------------
+  # it will return a unique data.frame with the random walk
+
+  srwalkGenerator(time_to_maturity,
+                  prob,
+                  scale,
+                  n = 1)[[1]]
 }
