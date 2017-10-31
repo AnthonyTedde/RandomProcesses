@@ -2,11 +2,15 @@
 title: "Usage of a random walk generator"
 author: "Anthony Tedde"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output:
+  pdf_document:
+    default
+  rmarkdown::html_vignette:
+    default
 vignette: >
+  \usepackage[utf8]{inputenc}
   %\VignetteIndexEntry{Usage of a random walk generator function: srwalkGenerator}
   %\VignetteEngine{knitr::rmarkdown}
-  \usepackage[utf8]{inputenc}
 ---
 ## Load a list of sampled random walks
 
@@ -17,7 +21,7 @@ where the value of the random walk in not random (the value is actually equal to
 value.
 
 ```{R}
-rw <- srwalkGenerator(n = 100)
+rw <- RandomWalk::srwalkGenerator(n = 100)
 ```
 
 This is a summary of the first element of the list:
@@ -29,13 +33,13 @@ summary(rw[[1]])
 ## Graph the random walks
 
 ```{R}
-ggplot2::ggplot(rw[[1]], aes(x = time_periods, y = random_walk_path)) + 
-  geom_line()
+ggplot2::ggplot(rw[[1]], ggplot2::aes(x = time_periods, y = random_walk_path)) + 
+  ggplot2::geom_line()
 ```
 
 ```{R}
-ggplot2::ggplot(bind_rows(rw, .id = "uniqueID"), 
-                aes(x = time_periods, y = random_walk_path, colour=uniqueID)) + 
-  geom_line() + 
-  theme(legend.position = 'none')
+ggplot2::ggplot(dplyr::bind_rows(rw, .id = "uniqueID"), 
+                ggplot2::aes(x = time_periods, y = random_walk_path, colour=uniqueID)) + 
+  ggplot2::geom_line() + 
+  ggplot2::theme(legend.position = 'none')
 ```
