@@ -3,14 +3,12 @@ title: "Usage of a random walk generator"
 author: "Anthony Tedde"
 date: "`r Sys.Date()`"
 output:
-  pdf_document:
-    default
-  rmarkdown::html_vignette:
-    default
-vignette: >
-  \usepackage[utf8]{inputenc}
-  %\VignetteIndexEntry{Usage of a random walk generator function: srwalkGenerator}
-  %\VignetteEngine{knitr::rmarkdown}
+  html_document:
+    df_print: paged
+  pdf_document: default
+  rmarkdown::html_vignette: default
+vignette: |
+  \usepackage[utf8]{inputenc} %\VignetteIndexEntry{Usage of a random walk generator function: srwalkGenerator} %\VignetteEngine{knitr::rmarkdown}
 ---
 ## Load a list of sampled random walks
 
@@ -21,7 +19,7 @@ where the value of the random walk in not random (the value is actually equal to
 value.
 
 ```{R}
-rw <- RandomWalk::srwalkGenerator(n = 100)
+rw <- RandomWalk::srwalkGenerator(n = 1000)
 ```
 
 This is a summary of the first element of the list:
@@ -38,8 +36,13 @@ ggplot2::ggplot(rw[[1]], ggplot2::aes(x = time_periods, y = random_walk_path)) +
 ```
 
 ```{R}
+# ggplot2::ggplot(dplyr::bind_rows(rw, .id = "uniqueID"), 
+#                 ggplot2::aes(x = time_periods, y = random_walk_path, colour=uniqueID)) + 
+#   ggplot2::geom_line(alpha=0.1) + 
+#   ggplot2::theme(legend.position = 'none')
+
 ggplot2::ggplot(dplyr::bind_rows(rw, .id = "uniqueID"), 
-                ggplot2::aes(x = time_periods, y = random_walk_path, colour=uniqueID)) + 
-  ggplot2::geom_line() + 
+                ggplot2::aes(x = time_periods, y = random_walk_path, group = uniqueID)) + 
+  ggplot2::geom_line(alpha=0.05) + 
   ggplot2::theme(legend.position = 'none')
 ```
