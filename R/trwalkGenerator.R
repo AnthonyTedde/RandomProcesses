@@ -1,10 +1,10 @@
-trwalkGenerator <- function(steps = 100,
+trwalkGenerator <- function(time_to_maturity = 100,
                             prob = c('head' = 1/2,
                                      'tail' = 1/2)){
 
-  # One unit is added to steps because the first step of the theoretical random
-  # walk is not random and in was indexed with 0 in theory.
-  dim_x <- dim_y <- 1:(steps + 1)
+  # One unit is added to time_to_maturity because the first step of the
+  # theoretical random walk is not random and in was indexed with 0 in theory.
+  dim_x <- dim_y <- 1:(time_to_maturity + 1)
   Mt <- outer(dim_x,
               dim_y,
               FUN=function(r,c){ifelse(c>=r, (c-r) - (r-1), NA_integer_)})
@@ -29,5 +29,5 @@ trwalkGenerator <- function(steps = 100,
                Pr = pr)
   }
 
-  lapply(1:(steps +1), anonymous)
+  lapply(1:(time_to_maturity +1), anonymous)
 }
