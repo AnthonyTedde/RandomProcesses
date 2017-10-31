@@ -27,7 +27,7 @@ srwalkGenerator <- function(time_to_maturity = 100,
 
   # All index (step * n) must be integer. Even it is probably not the optimal
   # way, I will round the value to get a sure integer value for (step * n)
-  step <- round(step * 100) / 100
+  # step <- round(step * 100) / 100
 
   # Define the path constant multiplier ----------------------------
   multiplier <- 1 / sqrt(scale)
@@ -38,7 +38,7 @@ srwalkGenerator <- function(time_to_maturity = 100,
 
   X <- lapply(x,
               sample,
-              size = time_to_maturity,
+              size = time_to_maturity * scale,
               replace = T,
               prob = prob)
 

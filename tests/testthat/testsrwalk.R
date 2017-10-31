@@ -26,6 +26,6 @@ test_that("minimal and maximal value of random value", {
 })
 
 test_that("scaled random variable (4 times, 100 scaled)", {
-  expect_equal(nrow(scaledrw), 4 * 100)
-  expect_equal(abs(scaledrw[1, 2]), 4 / 100)
+  expect_equal(nrow(scaledrw), (4 * 100) + 1)
+  expect_equal(abs(scaledrw[2, 2]), 1 / 10)
 })
