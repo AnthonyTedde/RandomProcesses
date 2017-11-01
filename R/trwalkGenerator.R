@@ -1,6 +1,7 @@
 trwalkGenerator <- function(time_to_maturity = 100,
                             prob = c('head' = 1/2,
-                                     'tail' = 1/2)){
+                                     'tail' = 1/2),
+                            scale = 1){
 
   # One unit is added to time_to_maturity because the first step of the
   # theoretical random walk is not random and in was indexed with 0 in theory.
