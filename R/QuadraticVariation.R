@@ -9,7 +9,8 @@
 #' [1] Symmetric Random Walk, Stochastic Calculus for Finance, Steven e. Shreve, 2004, pp 85
 #' @export
 quadraticVariation <- function(W, to) UseMethod('quadraticVariation')
-quadraticVariation.symmetricRandomWalk <- function(W, to) {
+
+quadraticVariation.randomwalk <- function(W, to) {
   quadV <- sapply(1:(length(W[, 2]) - 1), function(i) W[i + 1, 2] - W[i, 2])
   sum(quadV^2)
 }
