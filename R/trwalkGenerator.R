@@ -47,5 +47,5 @@ trwalkGenerator <- function(time_to_maturity = 100,
                Pr = pr)
   }
 
-  lapply(1:(time_to_maturity +1), anonymous)
+  lapply(1:(time_to_maturity * scale +1), anonymous)
 }
