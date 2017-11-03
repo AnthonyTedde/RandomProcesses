@@ -5,10 +5,15 @@ trwalkGenerator <- function(time_to_maturity = 100,
 
   # One unit is added to time_to_maturity because the first step of the
   # theoretical random walk is not random and in was indexed with 0 in theory.
-  dim_x <- dim_y <- 1:(time_to_maturity + 1)
+  dim_x <- dim_y <- 1:(time_to_maturity * scale + 1)
+  anonymous <- function (row, col){
+    ifelse(col>=row,
+           (1/sqrt(scale) * ((col-row) - (row-1))),
+           NA_integer_)
+  }
   Mt <- outer(dim_x,
               dim_y,
-              FUN=function(r,c){ifelse(c>=r, (c-r) - (r-1), NA_integer_)})
+              anonymous)
 
   #
   # Mt contains all the values the random variables could take
