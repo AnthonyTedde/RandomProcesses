@@ -1,0 +1,38 @@
+---
+title: "Limiting distribution of the scaled random walk"
+author: "Anthony Tedde"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+The purpose of this paper is to show that the distribution of the scaled random
+walk goes to the one of the normal law as the time intervals go to zero.
+
+## Random walk generation
+
+```{R}
+timeT <- 0.25
+anonymous <- function(n){
+  trwalkGenerator(time_to_maturity = timeT,
+                scale = n)[[n * timeT + 1]]
+}
+rws <- lapply(1:100, anonymous)
+```
+
+
+```{R}
+a <- data.frame(Mt = rws[[100]]$Mt / 0.2, Pr = rws[[100]]$Pr)
+ggplot2::ggplot(rws[[100]], ggplot2::aes(Mt)) +
+  ggplot2::geom_histogram(ggplot2::aes(weight = Pr / 0.2), binwidth = .2) +
+  ggplot2::scale_x_continuous(limits = c(-7.5, 7.5)) + 
+
++ 
+  ggplot2::stat_function(fun = dnorm,
+                         color = "red",
+                         args = list(mean = 0, 
+                                     sd = 0.25))
+```
