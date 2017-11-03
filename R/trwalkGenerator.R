@@ -1,3 +1,15 @@
+#' trwalkGenerator compute all the sets of the values taken by a random walk
+#' along with the associated probabilities.
+#' @param time_to_maturity - Time at which the random walk process stops
+#' @param prob - Probability of occurence of head and tail for each step
+#' @param scale - Divider of the time step and multiplier of the increments
+#' @examples
+#' # Generate the theoretical distribution and value for a symmetric random walk
+#' process up to time_to_maturity = 4 and scale = 100:
+#' trwalkGenerator(time_to_maturity = 4, scale = 100)
+#' @references
+#' [1] Symmetric Random Walk, Stochastic Calculus for Finance, Steven e. Shreve, 2004, pp 83-84
+#' @export
 trwalkGenerator <- function(time_to_maturity = 100,
                             prob = c('head' = 1/2,
                                      'tail' = 1/2),
