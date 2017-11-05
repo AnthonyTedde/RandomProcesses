@@ -15,5 +15,6 @@ divider <- 4
 #'  @example rw[[1]] take the value 0 for Mt and 1 for Pr. That means it is the
 #'  begining of the period where there is actually not probability taken into
 #'  account and where the only value taken by the R.W. is its initial value: 0
-rw <- RandomWalk::trwalkGenerator(time_to_maturity = timeT)
-
+rw <- RandomWalk::trwalkGenerator(time_to_maturity = timeT, full = T)
+rw_fullT <- RandomWalk::trwalkGenerator(time_to_maturity = timeT, full = T)
+rw_fullF <- RandomWalk::trwalkGenerator(time_to_maturity = timeT)

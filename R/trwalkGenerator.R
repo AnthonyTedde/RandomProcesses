@@ -13,7 +13,8 @@
 trwalkGenerator <- function(time_to_maturity = 100,
                             prob = c('head' = 1/2,
                                      'tail' = 1/2),
-                            scale = 1){
+                            scale = 1,
+                            full = FALSE){
 
   # One unit is added to time_to_maturity because the first step of the
   # theoretical random walk is not random and in was indexed with 0 in theory.
@@ -47,5 +48,11 @@ trwalkGenerator <- function(time_to_maturity = 100,
                Pr = pr)
   }
 
-  lapply(1:(time_to_maturity * scale +1), anonymous)
+  rw <- lapply(1:(time_to_maturity * scale +1), anonymous)
+
+  # Return either the full theorical distrib describing all period or only
+  # the last one which describe the final value of the random walk at
+  # time_to_maturity
+  if(full) rw
+  else rw[[time_to_maturity + 1]]
 }

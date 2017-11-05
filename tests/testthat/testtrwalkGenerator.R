@@ -15,7 +15,8 @@ rw10 <- rw[[length(rw)]]
 #' The time period goes from 0 to timeT. With each unit of the time cutting in
 #' #scale number of portion.
 scaledrw <- RandomWalk::trwalkGenerator(time_to_maturity = timeT,
-                                        scale = divider)
+                                        scale = divider,
+                                        full = T)
 
 #' @name scaledrw1 - contains all values taken by the random walk - and their according
 #' probabilities - at time period 10 with scale = divider.
@@ -90,4 +91,9 @@ test_that("# transaction period according to scale", {
 
 test_that("martingal property of the symmetric random walk", {
   expect_equal(EMlk, Mk[, 'Mt'])
+})
+
+test_that("full param give appropriate return", {
+   expect_equal(class(rw_fullT), 'list')
+  expect_equal(class(rw_fullF), 'data.frame')
 })
