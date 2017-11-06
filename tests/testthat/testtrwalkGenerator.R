@@ -73,6 +73,24 @@ EMlk <- sapply(1:nrow(Mk), anonymous)
 
 # TEST CASE ----------------------------
 
+# TODO The following case with the idea to create such a "getter" function
+# to get the correct value of a random walk according to the time period
+# I want it to provide.
+test_that("Theoretical random walk has <<scale>> attribute", {
+  expect_true(is.element('scale', names(attributes(rw))))
+  expect_true(is.element('scale', names(attributes(scaledrw))))
+})
+
+test_that("Theoretical random walk has the right value for <<scale>> attribute", {
+  expect_equal(attributes(rw)$scale, 0)
+  expect_equal(attributes(scaledrw), divider)
+})
+
+test_that("The right value is returned from a call to the <<get>> function", {
+  expect_equal(get(rw, time = 4), seq(4, -4, by = -2))
+  expect_equal(get(scaledrw, time = 1 ), seq(4, -4, by = -2) * (1/sqrt(timeT)))
+})
+
 test_that("Expected value is zero", {
   expect_equal(expectedX, 0)
 })
@@ -83,6 +101,10 @@ test_that("Variance value is equal to time_to_maturity", {
 
 test_that("scaled RW increment against good multiplier", {
   expect_equal(scaledrw1, c(1/sqrt(divider), (-1) * 1/sqrt(divider)))
+})
+
+test_that("the range of possible value is correct", {
+  expect_equal(rw[[5]]$Mt, seq(4, -4, by = -2))
 })
 
 test_that("# transaction period according to scale", {
