@@ -74,7 +74,7 @@ EMlk <- sapply(1:nrow(Mk), anonymous)
 # TEST CASE ----------------------------
 
 test_that("Expected value is zero", {
-  expect_equal(expected, 0)
+  expect_equal(expectedX, 0)
 })
 
 test_that("Variance value is equal to time_to_maturity", {
