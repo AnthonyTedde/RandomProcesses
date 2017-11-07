@@ -16,7 +16,7 @@ sbmotion <- function(time_to_maturity = 4,
   # the variance of these increments. According to the theory, the variance is
   # given by: var(W[t_i+1] - W[t_i]) = t_i+1 - t_i
   time_step <- seq(0, time_to_maturity, by = time_interval)
-  deltaT <- time_step[-1] - time_step[-length(ti)]
+  deltaT <- time_step[-1] - time_step[-length(time_step)]
   variance_increment <- deltaT
   sd_increment <- sqrt(variance_increment)
 
