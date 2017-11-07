@@ -29,7 +29,7 @@ sbmotion <- function(time_to_maturity = 4,
              sd = sd_increment)
 
   bm <- sapply(1:time_upper_bound, FUN = function(time){
-    sum(n[1:x])
+    sum(n[1:time])
   })
 
   # As theorical lecture state: the brownian motion initial value is 0.
