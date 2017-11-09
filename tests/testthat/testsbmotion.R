@@ -18,13 +18,13 @@ bm2 <- sbmotion(time_to_maturity = timeT,
                scale = s)
 
 test_that("Brownian motion has belongs to correct class", {
-  expect_equal(class(bm), c('data.frame', 'brownianmotion'))
+  expect_equal(class(bm), c('brownianmotion', 'data.frame'))
 })
 
 test_that("Brownian motion has correct size", {
   expect_equal(nrow(bm), timeT * s + 1)
 })
 
-test_that("With same seed, sampled generated brownian motion must be reproducible"{
+test_that("With same seed, sampled generated brownian motion must be reproducible", {
   expect_equal(bm, bm2)
 })

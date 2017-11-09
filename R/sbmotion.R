@@ -35,6 +35,7 @@ sbmotion <- function(time_to_maturity = 4,
   # As theorical lecture state: the brownian motion initial value is 0.
   # An interesting case TODO will be to implement brownian motion with another
   # initial value than 0.
-  brownianmotion <- data.frame('time_periods' = time_step,
-                               'brownian_motion_path' = c(0,bm))
+  brownianmotion <- structure(data.frame('time_periods' = time_step,
+                                         'brownian_motion_path' = c(0,bm)),
+                              class = c('brownianmotion', 'data.frame'))
 }
