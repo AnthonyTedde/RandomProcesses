@@ -10,7 +10,7 @@
 #' @export
 quadraticVariation <- function(W, to) UseMethod('quadraticVariation')
 
-quadraticVariation.randomwalk <- function(W, to) {
+quadraticVariation.sampled_randomwalk <- function(W, to) {
   quadV <- sapply(1:(length(W[, 2]) - 1), function(i) W[i + 1, 2] - W[i, 2])
   sum(quadV^2)
 }

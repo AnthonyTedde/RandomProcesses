@@ -14,7 +14,11 @@ srwalkGenerator <- function(time_to_maturity = 100,
                             prob = c('head' = 0.5,
                                      'tail' = 0.5),
                             scale = 1,
+                            seed = 1,
                             n = 1){
+
+  # set.seed to get reproducible experiments
+  set.seed(seed)
 
   # set the whole time step ----------------------------
   # The following has just to be set up once because it is the same one that
@@ -57,12 +61,12 @@ srwalkGenerator <- function(time_to_maturity = 100,
   # of the scaled random walk
 
   rwalkFactory <- function(x){
-    a <- data.frame(step, x)
-    class(a) <- c(class(a), "randomwalk")
-    names(a) <- c('time_periods', 'random_walk_path')
-    a
+    a <- structure(data.frame(step, x),
+                   class = c('sampled_randomwalk', class(data.frame())),
+                   names = c('time_periods', 'random_walk_path'))
   }
 
-  lapply(sampledRandomWalk, rwalkFactory )
+  structure(lapply(sampledRandomWalk, rwalkFactory ),
+            class = c('sampled_randomwalk', class(list())))
 
 }
