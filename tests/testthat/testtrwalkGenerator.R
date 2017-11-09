@@ -82,13 +82,13 @@ test_that("Theoretical random walk has <<scale>> attribute", {
 })
 
 test_that("Theoretical random walk has the right value for <<scale>> attribute", {
-  expect_equal(attributes(rw)$scale, 0)
-  expect_equal(attributes(scaledrw), divider)
+  expect_equal(attributes(rw)$scale, 1)
+  expect_equal(attributes(scaledrw)$scale, divider)
 })
 
 test_that("The right value is returned from a call to the <<get>> function", {
-  expect_equal(get(rw, time = 4), seq(4, -4, by = -2))
-  expect_equal(get(scaledrw, time = 1 ), seq(4, -4, by = -2) * (1/sqrt(timeT)))
+  expect_equal(get_theoricalValues(rw, time = 4), seq(4, -4, by = -2))
+  expect_equal(get_theoricalValues(scaledrw, time = 1 ), seq(4, -4, by = -2) * (1/sqrt(timeT)))
 })
 
 test_that("Expected value is zero", {
@@ -115,7 +115,7 @@ test_that("martingal property of the symmetric random walk", {
   expect_equal(EMlk, Mk[, 'Mt'])
 })
 
-test_that("full param give appropriate return", {
-   expect_equal(class(rw_fullT), 'list')
-  expect_equal(class(rw_fullF), 'data.frame')
+test_that("the right classes are set for theoretical randomwalk object", {
+ expect_equal(class(rw_fullT), c('theoretical_randomwalk', 'list'))
+  expect_equal(class(rw_fullF), c('theoretical_randomwalk', 'data.frame'))
 })

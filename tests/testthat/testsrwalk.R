@@ -8,7 +8,7 @@ scaledrw <- RandomWalk::srwalk(time_to_maturity = 4,
 variableNames <- c('time_periods', 'random_walk_path')
 
 test_that("Class of srwalk must belong to [data.frame, randomwalk]",{
-  expect_equal(class(srwalk()), c("data.frame", "randomwalk"))
+  expect_equal(class(srwalk()), c("sampled_randomwalk", "data.frame"))
 })
 
 test_that("random walk should always get time_to_maturity + 1 items", {
