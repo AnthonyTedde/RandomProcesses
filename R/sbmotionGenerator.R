@@ -41,7 +41,7 @@ sbmotionGenerator <- function(time_to_maturity = 4,
   # initial value than 0.
   anonymous <- function(bmotion){
     structure(data.frame('time_periods' = time_step,
-                         'brownian_motion_path' = c(0,bm)),
+                         'brownian_motion_path' = c(0,bmotion)),
               class = c('sampled_brownianmotion', class(data.frame())))
   }
   brownianmotion <- structure(lapply(bm, anonymous),
