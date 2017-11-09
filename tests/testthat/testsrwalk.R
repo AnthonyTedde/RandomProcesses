@@ -8,7 +8,8 @@ scaledrw <- RandomWalk::srwalk(time_to_maturity = 4,
 variableNames <- c('time_periods', 'random_walk_path')
 
 test_that("Class of srwalk must belong to [data.frame, randomwalk]",{
-  expect_equal(class(srwalk()), c("sampled_randomwalk", "data.frame"))
+  expect_equal(class(srwalk()), c("sampled_randomwalk",
+                                  class(data.frame())))
 })
 
 test_that("random walk should always get time_to_maturity + 1 items", {
@@ -28,4 +29,8 @@ test_that("minimal and maximal value of random value", {
 test_that("scaled random variable (4 times, 100 scaled)", {
   expect_equal(nrow(scaledrw), (4 * 100) + 1)
   expect_equal(abs(scaledrw[2, 2]), 1 / 10)
+})
+
+test_that("With same seed, sampled generated random walk must be reproducible", {
+  expect_equal(srwalk(seed = 5), srwalk(seed = 5))
 })

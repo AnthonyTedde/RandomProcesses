@@ -116,6 +116,6 @@ test_that("martingal property of the symmetric random walk", {
 })
 
 test_that("the right classes are set for theoretical randomwalk object", {
- expect_equal(class(rw_fullT), c('theoretical_randomwalk', 'list'))
-  expect_equal(class(rw_fullF), c('theoretical_randomwalk', 'data.frame'))
+  expect_equal(class(rw_fullT), c('theoretical_randomwalk', class(list())))
+  expect_equal(class(rw_fullF), c('theoretical_randomwalk', class(data.frame())))
 })
