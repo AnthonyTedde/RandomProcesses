@@ -50,7 +50,7 @@ trwalkGenerator <- function(time_to_maturity = 100,
 
   rw <- structure(lapply(1:(time_to_maturity * scale +1), anonymous),
                   scale = scale,
-                  class = c('theoretical_randomwalk', 'list'))
+                  class = c('theoretical_randomwalk', class(list())))
 
   # Return either the full theorical distrib describing all period or only
   # the last one which describe the final value of the random walk at
@@ -58,7 +58,7 @@ trwalkGenerator <- function(time_to_maturity = 100,
   if(full) rw
   else
     structure(rw[[time_to_maturity + 1]],
-              class = c('theoretical_randomwalk', 'data.frame'))
+              class = c('theoretical_randomwalk', class(data.frame())))
 }
 
 
