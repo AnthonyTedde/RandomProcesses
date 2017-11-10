@@ -2,7 +2,7 @@ library(testthat)
 library(RandomWalk)
 
 test_that("The generator provides the good classes for its generated sampled Brownian Motion", {
-  expect_equal(class(sbmotionGenerator()), c('sampled_brownianmotion',
+  expect_equal(class(sbmotionGenerator(n = 2)), c('sampled_brownianmotion',
                                              class(list())))
   expect_equal(class(sbmotionGenerator(n = 1)), c('sampled_brownianmotion',
                                                   class(data.frame())))

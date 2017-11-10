@@ -44,6 +44,11 @@ sbmotionGenerator <- function(time_to_maturity = 4,
                          'brownian_motion_path' = c(0,bmotion)),
               class = c('sampled_brownianmotion', class(data.frame())))
   }
+
+  # Simplify the output if the number of path =1. Overkill to provide a list of
+  # one data.frame. A uniq data.frame does the job
   brownianmotion <- structure(lapply(bm, anonymous),
                               class = c('sampled_brownianmotion', class(list())))
+  if (n == 1) brownianmotion[[1]]
+  else brownianmotion
 }

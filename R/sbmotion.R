@@ -37,5 +37,5 @@ sbmotion <- function(time_to_maturity = 4,
   # initial value than 0.
   brownianmotion <- structure(data.frame('time_periods' = time_step,
                                          'brownian_motion_path' = c(0,bm)),
-                              class = c('brownianmotion', 'data.frame'))
+                              class = c('sampled_brownianmotion', 'data.frame'))
 }
