@@ -18,3 +18,11 @@ test_that("With same seed, sampled generated brownian motion must be reproducibl
   expect_equal(sbmotionGenerator(seed = 4, n = 4),
                sbmotionGenerator(seed = 4, n = 4))
 })
+
+# The following is unusable for the use of brownian motion because a brownian
+# motion has not a defined time step.
+# TODO To remove from the test.
+test_that("The generator provides the good value for scale attribute", {
+  expect_equal(attributes(sbmotionGenerator(scale = 100))$scale, 100)
+  expect_equal(attributes(sbmotionGenerator(scale = 100, n = 4))$scale, 100)
+})

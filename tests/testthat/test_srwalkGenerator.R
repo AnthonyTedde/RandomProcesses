@@ -42,3 +42,8 @@ test_that("The generator provides the good classes for its generated sampled ran
 test_that("The generator return a data.frame when only one path is asked", {
   expect_equal(class(rw_uniq_path), c('sampled_randomwalk', class(data.frame())))
 })
+
+test_that("The generator return the correct attributes for a sym. random walk", {
+  expect_that(attributes(srwalkGenerator(scale = 400))$scale, 400)
+  expect_that(attributes(srwalkGenerator(scale = 400, n = 10))$scale, 400)
+})
