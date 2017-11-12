@@ -1,8 +1,19 @@
 #' Generator of symmetric random walk sampled only one time along with its time periods.
 #' The time period goes from 0 up to T (0: steps)
 #' It corresponds to a single random walk's path with each of its associated time period.
-#' @param steps - Number of steps of the random walk
+#'
+#'
+#' @param time_to_maturity - Number of time_to_maturity of the random walk
 #' @param prob - Probability of occurence of head and tail for each step
+#' @param scale - It defines the time partition between each unit of time.
+#' For instance if the scale is 100, the time step [0,1] will be cut in 100 parts.
+#' Furthermore this param defines the increment multiplier as well.
+#' If the scale is 100, the multiplier which defines the next value will be
+#' (+1 / -1) * 1/sqrt(100)
+#' @param seed - With same seed, 2 exeriments will give the same output. It therefore
+#' provides reproducibles experiments.
+#'
+#'
 #' @examples
 #' # Generate a 150 steps symmetric random walk
 #' adaptedSampledSymmetricRandomWalk(steps = 150)

@@ -10,9 +10,18 @@ srwalk(time_to_maturity = 100, prob = c(head = 0.5, tail = 0.5), seed = 1,
   scale = 1)
 }
 \arguments{
+\item{time_to_maturity}{- Number of time_to_maturity of the random walk}
+
 \item{prob}{- Probability of occurence of head and tail for each step}
 
-\item{steps}{- Number of steps of the random walk}
+\item{seed}{- With same seed, 2 exeriments will give the same output. It therefore
+provides reproducibles experiments.}
+
+\item{scale}{- It defines the time partition between each unit of time.
+For instance if the scale is 100, the time step [0,1] will be cut in 100 parts.
+Furthermore this param defines the increment multiplier as well.
+If the scale is 100, the multiplier which defines the next value will be
+(+1 / -1) * 1/sqrt(100)}
 }
 \description{
 Generator of symmetric random walk sampled only one time along with its time periods.
