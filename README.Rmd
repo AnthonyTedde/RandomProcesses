@@ -34,6 +34,7 @@ incurs the same Quadratic Variation among all the different path.
 please feel free to have a look inside the [vignettes](/vignettes) repository.
 
 
+<!-- +++++++++++++++ New H2 +++++++++++++++ -->
 
 
 ## Functions provided by the package
@@ -47,6 +48,7 @@ please feel free to have a look inside the [vignettes](/vignettes) repository.
 * Quadratic Variation: [qvar](#qvar)
 
 
+<!-- +++++++++++++++ New h2 +++++++++++++++ --> 
 
  
 ## Description of the functions as they was created and defined
@@ -59,7 +61,7 @@ the package functions take as well as the way these agruments are defined (along
 with the default value they take)
 
  
-<!-- +++++++++++++++ srwalkGenerator description +++++++++++++++ --> 
+ 
 ### srwalkGenerator
 
 
@@ -80,6 +82,7 @@ the following variables:
   the time period in which the random walk evolved. The partition step of this vector
   depends on the variable *scale*.
 2. *random_walk_path*: All random values taken by the sampled random walk.  
+
 
 
 #### Example of usage
