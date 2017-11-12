@@ -1,3 +1,4 @@
+#' @title A generator of Sampled Random Walks
 #' It generates a list of n Sampled Random Walks along with the appropriate time period.
 #' The time period goes from 0 up to T (0: time_to_maturity).
 #' Because it is the same experiment for all the items of the list,
