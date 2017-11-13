@@ -1,3 +1,11 @@
+---
+output:
+  md_document: default
+  pdf_document:
+    smart: false
+  html_document:
+    smart: false 
+---
 # Random Walk R package (RandomWalk)
 
 ## Introduction
@@ -91,7 +99,7 @@ the following variables:
 library(RandomWalk)
 # The following line set the variable @sampled with a list of 20
 # data.frame of Adapted random walk.
-Sampled <- srwalkGenerator(steps = 500, n = 20)
+Sampled <- srwalkGenerator(time_to_maturity = 500, n = 20)
 ```
 
   
@@ -111,6 +119,7 @@ It returns a uniq S3 object with classes as follow:
 
 ```{R}
 c("sampled_randomwalk", "data.frame")
+print('coucou')
 ```
  
 srwalk() output a data.frame which contains each step of the time value along 
@@ -121,7 +130,13 @@ with the associated Sampled Random Walk value.
 #### Example of usage
   
 ```{r}
+library(knitr)
 library(RandomWalk)
 # Generate a 150 steps symmetric random walk
-srwalk(steps = 150)
+srw <- srwalk(time_to_maturity =  150)
+kable(head(srw))
 ``` 
+
+
+
+
