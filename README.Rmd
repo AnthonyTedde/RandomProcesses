@@ -128,15 +128,19 @@ with the associated Sampled Random Walk value.
 
 
 #### Example of usage
-  
-```{r}
-library(knitr)
+```{r echo=TRUE}
 library(RandomWalk)
 # Generate a 150 steps symmetric random walk
 srw <- srwalk(time_to_maturity =  150)
+``` 
+  
+\begin{center}
+  
+```{r echo=FALSE}
+library(knitr)
+library(kableExtra)
 kable(head(srw))
 ``` 
 
-
-
+\end{center}
 

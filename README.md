@@ -181,14 +181,15 @@ along with the associated Sampled Random Walk value.
 
 #### Example of usage
 
-    library(knitr)
-
-    ## Warning: package 'knitr' was built under R version 3.4.2
-
     library(RandomWalk)
     # Generate a 150 steps symmetric random walk
     srw <- srwalk(time_to_maturity =  150)
-    kable(head(srw))
+
+\\begin{center}
+
+    ## Warning: package 'knitr' was built under R version 3.4.2
+
+    ## Warning: package 'kableExtra' was built under R version 3.4.2
 
 <table>
 <thead>
@@ -224,3 +225,5 @@ along with the associated Sampled Random Walk value.
 </tr>
 </tbody>
 </table>
+
+\\end{center}
