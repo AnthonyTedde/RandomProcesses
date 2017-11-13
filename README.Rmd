@@ -117,9 +117,8 @@ Sampled <- srwalkGenerator(time_to_maturity = 500, n = 20)
 This function is defined to be the constructor of a unique Sampled Random Walk.
 It returns a uniq S3 object with classes as follow:
 
-```{R}
+```{R echo=FALSE}
 c("sampled_randomwalk", "data.frame")
-print('coucou')
 ```
  
 srwalk() output a data.frame which contains each step of the time value along 
@@ -134,13 +133,9 @@ library(RandomWalk)
 srw <- srwalk(time_to_maturity =  150)
 ``` 
   
-\begin{center}
   
-```{r echo=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE, error=FALSE}
 library(knitr)
 library(kableExtra)
 kable(head(srw))
-``` 
-
-\end{center}
-
+```   

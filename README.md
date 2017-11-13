@@ -168,13 +168,7 @@ contains the following variables:
 This function is defined to be the constructor of a unique Sampled
 Random Walk. It returns a uniq S3 object with classes as follow:
 
-    c("sampled_randomwalk", "data.frame")
-
     ## [1] "sampled_randomwalk" "data.frame"
-
-    print('coucou')
-
-    ## [1] "coucou"
 
 srwalk() output a data.frame which contains each step of the time value
 along with the associated Sampled Random Walk value.
@@ -184,12 +178,6 @@ along with the associated Sampled Random Walk value.
     library(RandomWalk)
     # Generate a 150 steps symmetric random walk
     srw <- srwalk(time_to_maturity =  150)
-
-\\begin{center}
-
-    ## Warning: package 'knitr' was built under R version 3.4.2
-
-    ## Warning: package 'kableExtra' was built under R version 3.4.2
 
 <table>
 <thead>
@@ -225,5 +213,3 @@ along with the associated Sampled Random Walk value.
 </tr>
 </tbody>
 </table>
-
-\\end{center}
