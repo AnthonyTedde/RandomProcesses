@@ -94,35 +94,34 @@ library(RandomWalk)
 Sampled <- srwalkGenerator(steps = 500, n = 20)
 ```
 
-
-
-
+  
 
 <!-- +++++++++++++++ srwalk description +++++++++++++++ --> 
 ### srwalk
  
-| Arguments | Description |
-|---|---|
-| time_to_maturity | Ending time up to the random walk goes |
-| prob | Probability of occurence of head and tails for each step |
-| scale | Define the partition of the time period. and the scale of up and down 
-  factors of the random walk |
+| Arguments | Default | Description |
+|---|---|---|
+| time_to_maturity | 100 | Final time up to the random walk goes |
+| prob | 0.5 | Probability of occurence of head and tail for each step |
+| scale | 1 | Define the partition of the time period. and the scale of up and down factors of the random walk, following the rule: sqrt(scale)^(-1)|
+| seed | 1 | The seed fixes initial value of the pseudo random number generation |
   
-This function can be used as a constructor of a unique random walk.
-It returns a unique S3 object whose class is c("data.frame", "randomwalk")
+This function is defined to be the constructor of a unique Sampled Random Walk.
+It returns a uniq S3 object with classes as follow:
 
-The specificity of the class "randomwalk" will be useful for the created
-generic methods to pick the correct function.
-  
-The returned value is simplified in a way that it is not a list of random walks
-but instead it returns a uniq *data.frame* containing a random walk along
-with its time period values. 
+```{R}
+c("sampled_randomwalk", "data.frame")
+```
+ 
+srwalk() output a data.frame which contains each step of the time value along 
+with the associated Sampled Random Walk value.
+
+
 
 #### Example of usage
   
 ```{r}
 library(RandomWalk)
-# The following line set the variable @sampled with a list of 20
-# data.frame of Adapted random walk.
-Sampled <- srwalk(steps = 500, n = 20)
+# Generate a 150 steps symmetric random walk
+srwalk(steps = 150)
 ``` 
