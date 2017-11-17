@@ -60,8 +60,3 @@ trwalkGenerator <- function(time_to_maturity = 100,
     structure(rw[[time_to_maturity + 1]],
               class = c('theoretical_randomwalk', class(data.frame())))
 }
-
-
-get_theoricalValues.randomwalk <- function(obj){
-  print('randomwalk')
-}
