@@ -79,11 +79,13 @@ srwalkGenerator <- function(time_to_maturity = 100,
   rwalkFactory <- function(x){
     a <- structure(data.frame(step, x),
                    class = c('sampled_randomwalk', class(data.frame())),
-                   names = c('time_periods', 'random_walk_path'))
+                   names = c('time_periods', 'random_walk_path'),
+                   scale = scale)
   }
 
   randomwalk <- structure(lapply(sampledRandomWalk, rwalkFactory ),
-                          class = c('sampled_randomwalk', class(list())))
+                          class = c('sampled_randomwalk', class(list())),
+                          scale = scale)
 
   if (n == 1) randomwalk[[1]]
   else randomwalk

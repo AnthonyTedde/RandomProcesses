@@ -86,11 +86,6 @@ test_that("Theoretical random walk has the right value for <<scale>> attribute",
   expect_equal(attributes(scaledrw)$scale, divider)
 })
 
-test_that("The right value is returned from a call to the <<get>> function", {
-  expect_equal(get_theoricalValues(rw, time = 4), seq(4, -4, by = -2))
-  expect_equal(get_theoricalValues(scaledrw, time = 1 ), seq(4, -4, by = -2) * (1/sqrt(timeT)))
-})
-
 test_that("Expected value is zero", {
   expect_equal(expectedX, 0)
 })

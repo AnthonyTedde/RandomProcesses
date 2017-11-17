@@ -44,6 +44,8 @@ test_that("The generator return a data.frame when only one path is asked", {
 })
 
 test_that("The generator return the correct attributes for a sym. random walk", {
-  expect_that(attributes(srwalkGenerator(scale = 400))$scale, 400)
-  expect_that(attributes(srwalkGenerator(scale = 400, n = 10))$scale, 400)
+  expect_equal(attributes(srwalkGenerator(time_to_maturity = 1,
+                                          scale = 400))$scale, 400)
+  expect_equal(attributes(srwalkGenerator(time_to_maturity = 1,
+                                          scale = 3, n = 10))$scale, 3)
 })

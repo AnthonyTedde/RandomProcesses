@@ -15,6 +15,11 @@ test_that("Getter function return the good value for the given time period", {
 # scale ----------------------------
 # test_that("Getter function return the good scale value for a given R.W.")
 
+# test_that("The right value is returned from a call to the <<get>> function", {
+#   expect_equal(get_theoricalValues(rw, time = 4), seq(4, -4, by = -2))
+#   expect_equal(get_theoricalValues(scaledrw, time = 1 ), seq(4, -4, by = -2) * (1/sqrt(timeT)))
+# })
+
 
 
 
