@@ -114,3 +114,13 @@ test_that("the right classes are set for theoretical randomwalk object", {
   expect_equal(class(rw_fullT), c('theoretical_randomwalk', class(list())))
   expect_equal(class(rw_fullF), c('theoretical_randomwalk', class(data.frame())))
 })
+
+test_that("full TRUE of FALSE argument return the same last period", {
+  trw_full <- trwalkGenerator(full = T)
+  trw_notfull <- trwalkGenerator(full = F)
+  expect_equal(trw_full[[length(trw_full)]], trw_notfull)
+
+  trw_full <- trwalkGenerator(scale = 2, full = T)
+  trw_notfull <- trwalkGenerator(scale = 2, full = F)
+  expect_equal(trw_full[[length(trw_full)]], trw_notfull)
+})

@@ -44,8 +44,9 @@ trwalkGenerator <- function(time_to_maturity = 100,
   anonymous <- function(i){
     rw <- Mt[!is.na(Mt[, i]),i]
     pr <- fi[1:length(rw),i]
-    data.frame(Mt = rw,
-               Pr = pr)
+    structure(data.frame(Mt = rw,
+               Pr = pr),
+              class = c('theoretical_randomwalk', class(data.frame())))
   }
 
   rw <- structure(lapply(1:(time_to_maturity * scale +1), anonymous),
@@ -57,6 +58,5 @@ trwalkGenerator <- function(time_to_maturity = 100,
   # time_to_maturity
   if(full) rw
   else
-    structure(rw[[time_to_maturity + 1]],
-              class = c('theoretical_randomwalk', class(data.frame())))
+    rw[[(time_to_maturity * scale) + 1]]
 }
