@@ -49,7 +49,7 @@ please feel free to have a look inside the [vignettes](/vignettes) repository.
 
 * Multiple Sampled Radom Walks generator: [srwalkGenerator](#srwalkgenerator)
 * Sampled Radom Walk constructor: [srwalk](#srwalk)
-* Theoretical Radom Walk: [trwalk](#trwalk)
+* Theoretical Radom Walk: [trwalkGenerator](#trwalkgenerator)
 * Multiple Brownian Motions generator: [sbmotionGenerator](#sbmotiongenerator)
 * Brownian Motion constructor: [sbmotion](#sbmotion)
 * Theoretical Radom Walk: [tbmotion]()
@@ -74,6 +74,16 @@ with the default value they take)
 
 
 #### Definition
+
+```{r}
+# anonymous <- function(x){
+#   # print(paste0("formals(srwalk)$", names(x)))
+#   # c(names(x),
+#   # eval(parse(text = paste0("formals(srwalk)$", names(x)))))
+#   rbind(x)
+# }
+# sapply(c(names(formals(srwalk)), formals(srwalk)), FUN = anonymous)
+```
 
 | Arguments | Default | Description |
 |---|---|---|
@@ -107,11 +117,12 @@ Sampled <- srwalkGenerator(time_to_maturity = 500, n = 20)
 <!-- +++++++++++++++ srwalk description +++++++++++++++ --> 
 ### srwalk
  
+
 | Arguments | Default | Description |
 |---|---|---|
 | time_to_maturity | 100 | Final time up to the random walk goes |
 | prob | 0.5 | Probability of occurence of head and tail for each step |
-| scale | 1 | Define the partition of the time period. and the scale of up and down factors of the random walk, following the rule: sqrt(scale)^(-1)|
+| scale | 1 | Define the partition of the time period. The scale of up and down factors of the random walk follows the rule: $sqrt(scale)^{-1}$ |
 | seed | 1 | The seed fixes initial value of the pseudo random number generation |
   
 This function is defined to be the constructor of a unique Sampled Random Walk.
@@ -139,3 +150,63 @@ library(knitr)
 library(kableExtra)
 kable(head(srw))
 ```   
+
+
+
+
+<!-- +++++++++++++++ srwalk description +++++++++++++++ --> 
+### trwalkGenerator
+ 
+
+| Arguments | Default | Description |
+|---|---|---|
+| time_to_maturity | 100 | Final time up to the Random Walk goes |
+| prob | 0.5 | Probability of occurence of head and tail for each step |
+| scale | 1 | Define the partition of the time period. The scale of up and down factors of the Random Walk follows the rule: $sqrt(scale)^{-1}$ |
+| full | FALSE | If TRUE, all the periods are returned. If FALSE, only the last one be. |
+  
+ 
+This function return all the values the Random Walk could take along with their 
+associated probabilities. Either the argument full is set to FALSE and only the 
+last time period is return or it is set to TRUE and all the periods are then 
+provided.
+
+It returns a uniq S3 object with classes as follow:
+
+```{R echo=FALSE}
+class(trwalkGenerator())
+```
+ 
+  
+#### Example of usage
+
+```{r echo=TRUE, eval=FALSE}
+library(RandomWalk)
+# Generate the distribution of a 150 steps Symmetric Random Walk
+trwalkGenerator(time_to_maturity =  150, full = T)
+
+# Generate the distribution of a Symmetric Random walk from time 0 to 4.
+# It only returns the last time distribution along with the associated 
+# probabilities
+trwalkGenerator(time_to_maturity = 4, scale = 2)
+``` 
+
+The last example gives the following result:  
+  
+```{r echo=FALSE, message=FALSE, warning=FALSE, error=FALSE}
+library(knitr)
+library(kableExtra)
+kable(trwalkGenerator(time_to_maturity = 4, scale = 2) )
+```   
+
+With expectation and variance:
+
+```{R}
+# Declare the Theoretical Random Walk
+trw <- trwalkGenerator(time_to_maturity = 4, scale = 2) 
+# Expectation:
+(Exp <- sum(trw[, 'Pr'] * trw[, 'Mt']))
+
+# Variance (Which is, according to the theory, equal to time_to_maturity): 
+sum(trw[, 'Pr'] * trw[, 'Mt'] ^ 2) - Exp
+```
