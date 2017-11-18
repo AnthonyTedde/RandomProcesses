@@ -45,7 +45,7 @@ Functions provided by the package
 -   Multiple Sampled Radom Walks generator:
     [srwalkGenerator](#srwalkgenerator)
 -   Sampled Radom Walk constructor: [srwalk](#srwalk)
--   Theoretical Radom Walk: [trwalk](#trwalk)
+-   Theoretical Radom Walk: [trwalkGenerator](#trwalkgenerator)
 -   Multiple Brownian Motions generator:
     [sbmotionGenerator](#sbmotiongenerator)
 -   Brownian Motion constructor: [sbmotion](#sbmotion)
@@ -66,6 +66,14 @@ agruments are defined (along with the default value they take)
 ### srwalkGenerator
 
 #### Definition
+
+    # anonymous <- function(x){
+    #   # print(paste0("formals(srwalk)$", names(x)))
+    #   # c(names(x),
+    #   # eval(parse(text = paste0("formals(srwalk)$", names(x)))))
+    #   rbind(x)
+    # }
+    # sapply(c(names(formals(srwalk)), formals(srwalk)), FUN = anonymous)
 
 <table style="width:17%;">
 <colgroup>
@@ -155,7 +163,7 @@ contains the following variables:
 <tr class="odd">
 <td>scale</td>
 <td>1</td>
-<td>Define the partition of the time period. and the scale of up and down factors of the random walk, following the rule: sqrt(scale)^(-1)</td>
+<td>Define the partition of the time period. The scale of up and down factors of the random walk follows the rule: <span class="math inline"><em>s</em><em>q</em><em>r</em><em>t</em>(<em>s</em><em>c</em><em>a</em><em>l</em><em>e</em>)<sup>−1</sup></span></td>
 </tr>
 <tr class="even">
 <td>seed</td>
@@ -213,3 +221,126 @@ along with the associated Sampled Random Walk value.
 </tr>
 </tbody>
 </table>
+
+<!-- +++++++++++++++ srwalk description +++++++++++++++ -->
+### trwalkGenerator
+
+<table style="width:17%;">
+<colgroup>
+<col style="width: 5%" />
+<col style="width: 5%" />
+<col style="width: 5%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Arguments</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>time_to_maturity</td>
+<td>100</td>
+<td>Final time up to the Random Walk goes</td>
+</tr>
+<tr class="even">
+<td>prob</td>
+<td>0.5</td>
+<td>Probability of occurence of head and tail for each step</td>
+</tr>
+<tr class="odd">
+<td>scale</td>
+<td>1</td>
+<td>Define the partition of the time period. The scale of up and down factors of the Random Walk follows the rule: <span class="math inline"><em>s</em><em>q</em><em>r</em><em>t</em>(<em>s</em><em>c</em><em>a</em><em>l</em><em>e</em>)<sup>−1</sup></span></td>
+</tr>
+<tr class="even">
+<td>full</td>
+<td>FALSE</td>
+<td>If TRUE, all the periods are returned. If FALSE, only the last one be.</td>
+</tr>
+</tbody>
+</table>
+
+This function return all the values the Random Walk could take along
+with their associated probabilities. Either the argument full is set to
+FALSE and only the last time period is return or it is set to TRUE and
+all the periods are then provided.
+
+It returns a uniq S3 object with classes as follow:
+
+    ## [1] "theoretical_randomwalk" "data.frame"
+
+#### Example of usage
+
+    library(RandomWalk)
+    # Generate the distribution of a 150 steps Symmetric Random Walk
+    trwalkGenerator(time_to_maturity =  150, full = T)
+
+    # Generate the distribution of a Symmetric Random walk from time 0 to 4.
+    # It only returns the last time distribution along with the associated 
+    # probabilities
+    trwalkGenerator(time_to_maturity = 4, scale = 2)
+
+The last example gives the following result:
+
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Mt</th>
+<th style="text-align: right;">Pr</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">5.656854</td>
+<td style="text-align: right;">0.0039062</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4.242641</td>
+<td style="text-align: right;">0.0312500</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2.828427</td>
+<td style="text-align: right;">0.1093750</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1.414214</td>
+<td style="text-align: right;">0.2187500</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.000000</td>
+<td style="text-align: right;">0.2734375</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-1.414214</td>
+<td style="text-align: right;">0.2187500</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">-2.828427</td>
+<td style="text-align: right;">0.1093750</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-4.242641</td>
+<td style="text-align: right;">0.0312500</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">-5.656854</td>
+<td style="text-align: right;">0.0039062</td>
+</tr>
+</tbody>
+</table>
+
+With expectation and variance:
+
+    # Declare the Theoretical Random Walk
+    trw <- trwalkGenerator(time_to_maturity = 4, scale = 2) 
+    # Expectation:
+    (Exp <- sum(trw[, 'Pr'] * trw[, 'Mt']))
+
+    ## [1] 0
+
+    # Variance (Which is, according to the theory, equal to time_to_maturity): 
+    sum(trw[, 'Pr'] * trw[, 'Mt'] ^ 2) - Exp
+
+    ## [1] 4
