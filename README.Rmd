@@ -11,7 +11,7 @@ output:
 # Random Walk R package (RandomWalk)
 
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, error=FALSE, out.width='100%', out.height='40%'}
+```{r echo=FALSE, message=FALSE, warning=FALSE, error=FALSE, out.width='100%', out.height='150px'}
   ggplot2::ggplot(RandomWalk::srwalk(time_to_maturity = 4, scale = 100, seed = 5), 
                   ggplot2::aes(time_periods, random_walk_path)) +
   ggplot2::geom_line() +

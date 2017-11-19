@@ -14,7 +14,7 @@
 Random Walk R package (RandomWalk)
 ==================================
 
-<img src="README_files/figure-markdown_strict/unnamed-chunk-1-1.png" width="100%" height="40%" />
+<img src="README_files/figure-markdown_strict/unnamed-chunk-1-1.png" width="100%" height="150px" />
 
 Introduction
 ------------
