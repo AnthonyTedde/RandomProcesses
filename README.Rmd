@@ -1,7 +1,6 @@
 ---
 output:
   md_document:
-    variant: gfm
     toc: true
     toc_depth: 3
   pdf_document:
