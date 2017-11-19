@@ -80,13 +80,15 @@ agruments are defined (along with the default value they take)
 
 #### Definition
 
-    # anonymous <- function(x){
-    #   # print(paste0("formals(srwalk)$", names(x)))
-    #   # c(names(x),
-    #   # eval(parse(text = paste0("formals(srwalk)$", names(x)))))
-    #   rbind(x)
-    # }
-    # sapply(c(names(formals(srwalk)), formals(srwalk)), FUN = anonymous)
+``` r
+# anonymous <- function(x){
+#   # print(paste0("formals(srwalk)$", names(x)))
+#   # c(names(x),
+#   # eval(parse(text = paste0("formals(srwalk)$", names(x)))))
+#   rbind(x)
+# }
+# sapply(c(names(formals(srwalk)), formals(srwalk)), FUN = anonymous)
+```
 
 <table style="width:17%;">
 <colgroup>
@@ -141,10 +143,12 @@ contains the following variables:
 
 #### Example of usage
 
-    library(RandomWalk)
-    # The following line set the variable @sampled with a list of 20
-    # data.frame of Adapted random walk.
-    Sampled <- srwalkGenerator(time_to_maturity = 500, n = 20)
+``` r
+library(RandomWalk)
+# The following line set the variable @sampled with a list of 20
+# data.frame of Adapted random walk.
+Sampled <- srwalkGenerator(time_to_maturity = 500, n = 20)
+```
 
 <!-- +++++++++++++++ srwalk description +++++++++++++++ -->
 ### srwalk
@@ -196,44 +200,20 @@ along with the associated Sampled Random Walk value.
 
 #### Example of usage
 
-    library(RandomWalk)
-    # Generate a 150 steps symmetric random walk
-    srw <- srwalk(time_to_maturity =  150)
+``` r
+library(RandomWalk)
+# Generate a 150 steps symmetric random walk
+srw <- srwalk(time_to_maturity =  150)
+```
 
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: right;">time_periods</th>
-<th style="text-align: right;">random_walk_path</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">2</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">1</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">1</td>
-</tr>
-</tbody>
-</table>
+|  time\_periods|  random\_walk\_path|
+|--------------:|-------------------:|
+|              0|                   0|
+|              1|                   1|
+|              2|                   2|
+|              3|                   1|
+|              4|                   0|
+|              5|                   1|
 
 <!-- +++++++++++++++ srwalkGenerator description +++++++++++++++ -->
 ### trwalkGenerator
@@ -286,75 +266,46 @@ It returns a uniq S3 object with classes as follow:
 
 #### Example of usage
 
-    library(RandomWalk)
-    # Generate the distribution of a 150 steps Symmetric Random Walk
-    trwalkGenerator(time_to_maturity =  150, full = T)
+``` r
+library(RandomWalk)
+# Generate the distribution of a 150 steps Symmetric Random Walk
+trwalkGenerator(time_to_maturity =  150, full = T)
 
-    # Generate the distribution of a Symmetric Random walk from time 0 to 4.
-    # It only returns the last time distribution along with the associated 
-    # probabilities
-    trwalkGenerator(time_to_maturity = 4, scale = 2)
+# Generate the distribution of a Symmetric Random walk from time 0 to 4.
+# It only returns the last time distribution along with the associated 
+# probabilities
+trwalkGenerator(time_to_maturity = 4, scale = 2)
+```
 
 The last example gives the following result:
 
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: right;">Mt</th>
-<th style="text-align: right;">Pr</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">5.656854</td>
-<td style="text-align: right;">0.0039062</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">4.242641</td>
-<td style="text-align: right;">0.0312500</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">2.828427</td>
-<td style="text-align: right;">0.1093750</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">1.414214</td>
-<td style="text-align: right;">0.2187500</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">0.000000</td>
-<td style="text-align: right;">0.2734375</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">-1.414214</td>
-<td style="text-align: right;">0.2187500</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">-2.828427</td>
-<td style="text-align: right;">0.1093750</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">-4.242641</td>
-<td style="text-align: right;">0.0312500</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">-5.656854</td>
-<td style="text-align: right;">0.0039062</td>
-</tr>
-</tbody>
-</table>
+|         Mt|         Pr|
+|----------:|----------:|
+|   5.656854|  0.0039062|
+|   4.242641|  0.0312500|
+|   2.828427|  0.1093750|
+|   1.414214|  0.2187500|
+|   0.000000|  0.2734375|
+|  -1.414214|  0.2187500|
+|  -2.828427|  0.1093750|
+|  -4.242641|  0.0312500|
+|  -5.656854|  0.0039062|
 
 With expectation and variance:
 
-    # Declare the Theoretical Random Walk
-    trw <- trwalkGenerator(time_to_maturity = 4, scale = 2) 
-    # Expectation:
-    (Exp <- sum(trw[, 'Pr'] * trw[, 'Mt']))
+``` r
+# Declare the Theoretical Random Walk
+trw <- trwalkGenerator(time_to_maturity = 4, scale = 2) 
+# Expectation:
+(Exp <- sum(trw[, 'Pr'] * trw[, 'Mt']))
+```
 
     ## [1] 0
 
-    # Variance (Which is, according to the theory, equal to time_to_maturity): 
-    sum(trw[, 'Pr'] * trw[, 'Mt'] ^ 2) - Exp
+``` r
+# Variance (Which is, according to the theory, equal to time_to_maturity): 
+sum(trw[, 'Pr'] * trw[, 'Mt'] ^ 2) - Exp
+```
 
     ## [1] 4
 
@@ -409,14 +360,16 @@ contains the following variables:
 
 #### Example of usage
 
-    library(RandomWalk)
-    # The following line set the variable @sampled with a list of 20
-    # data.frame of Adapted random walk.
-    Sampled <- sbmotionGenerator(time_to_maturity = 4, scale = 100, n = 5)
+``` r
+library(RandomWalk)
+# The following line set the variable @sampled with a list of 20
+# data.frame of Adapted random walk.
+Sampled <- sbmotionGenerator(time_to_maturity = 4, scale = 100, n = 5)
+```
 
 The above example generates a list of 5 specifics Brownian Motion. To
 get an idea of what it represents, the following chart presents the
 pathes of those previous Brownian motion:
 
 ![Brownian Motion path up to time to maturity fixed at
-4](README_files/figure-markdown_strict/unnamed-chunk-11-1.png)
+4](README_files/figure-markdown_github/unnamed-chunk-11-1.png)
