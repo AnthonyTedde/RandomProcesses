@@ -1,7 +1,7 @@
 ---
 output:
   md_document:
-    variant: markdown_github
+    variant: gfm
     toc: true
     toc_depth: 3
   pdf_document:
@@ -219,7 +219,7 @@ sum(trw[, 'Pr'] * trw[, 'Mt'] ^ 2) - Exp
 
 
 <!-- +++++++++++++++ sbmotionGenerator description +++++++++++++++ --> 
-### trwalkGenerator
+### sbmotionGenerator
  
 
 | Arguments | Default | Description |
@@ -256,11 +256,20 @@ Brownian motion:
 ```{r echo=FALSE, message=FALSE, warning=FALSE, error=FALSE, fig.cap='Brownian Motion path up to time to maturity fixed at 4'}
   ggplot2::ggplot(Sampled[[1]], 
                   ggplot2::aes(time_periods, brownian_motion_path)) +
-  ggplot2::geom_point()
+  ggplot2::geom_point() +
+  ggplot2::labs(title = 'Uniq Brownian Motion path with time to maturity fixed at 4',
+                caption = 'Uniq Brownian Motion path',
+                x = 'Time period',
+                y = 'Brownian motion')
 ```   
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, error=FALSE}
 ggplot2::ggplot(dplyr::bind_rows(Sampled, .id = "uniqueID"), 
                 ggplot2::aes(x = time_periods, y = brownian_motion_path, group = uniqueID)) + 
-  ggplot2::geom_point(alpha=0.5) + 
-  ggplot2::theme(legend.position = 'none') 
+  ggplot2::geom_point(alpha=0.5, ggplot2::aes(colour = uniqueID)) + 
+  ggplot2::theme(legend.position = 'none') +
+  ggplot2::labs(title = 'Multiple Brownian Motions path with time to maturity fixed at 4',
+                caption = 'Multiple Brownian Motions paths',
+                x = 'Time period',
+                y = 'Brownian motion')
+```
