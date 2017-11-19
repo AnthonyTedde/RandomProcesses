@@ -14,6 +14,8 @@
 Random Walk R package (RandomWalk)
 ==================================
 
+<img src="README_files/figure-markdown_strict/unnamed-chunk-1-1.png" width="100%" />
+
 Introduction
 ------------
 
@@ -419,6 +421,6 @@ get an idea of what it represents, the following chart presents the
 pathes of those previous Brownian motion:
 
 ![Brownian Motion path up to time to maturity fixed at
-4](README_files/figure-markdown_strict/unnamed-chunk-11-1.png)
+4](README_files/figure-markdown_strict/unnamed-chunk-12-1.png)
 
-![](README_files/figure-markdown_strict/unnamed-chunk-12-1.png)
+![](README_files/figure-markdown_strict/unnamed-chunk-13-1.png)
