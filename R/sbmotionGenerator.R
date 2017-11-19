@@ -26,9 +26,12 @@ sbmotionGenerator <- function(time_to_maturity = 4,
   # E[increment] = 0
   # var(increment) = delta(time)
   anonymous <- function(x){
-    rnorm(n = time_upper_bound,
-          mean = 0,
-          sd = sd_increment)
+    # rnorm(n = time_upper_bound,
+    #       mean = 0,
+    #       sd = sd_increment)
+    Rs <- .Random.seed[time_step * x * time_to_maturity * seed]
+    sapply(Rs, FUN = function(seed) {set.seed(seed); rnorm(1, mean = 0,
+                                                          sd = sd_increment)})
   }
   normally_distributed_increment <- lapply(1:n, anonymous)
 
