@@ -373,3 +373,5 @@ pathes of those previous Brownian motion:
 
 ![Brownian Motion path up to time to maturity fixed at
 4](README_files/figure-markdown_github/unnamed-chunk-11-1.png)
+
+![](README_files/figure-markdown_github/unnamed-chunk-12-1.png)

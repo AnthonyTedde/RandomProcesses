@@ -259,5 +259,8 @@ Brownian motion:
   ggplot2::geom_point()
 ```   
 
-
- 
+```{r, echo=FALSE, message=FALSE, warning=FALSE, error=FALSE}
+ggplot2::ggplot(dplyr::bind_rows(Sampled, .id = "uniqueID"), 
+                ggplot2::aes(x = time_periods, y = brownian_motion_path, group = uniqueID)) + 
+  ggplot2::geom_point(alpha=0.5) + 
+  ggplot2::theme(legend.position = 'none') 
