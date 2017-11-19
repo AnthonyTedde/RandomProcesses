@@ -1,3 +1,16 @@
+-   [Random Walk R package
+    (RandomWalk)](#random-walk-r-package-randomwalk)
+    -   [Introduction](#introduction)
+        -   [Notes](#notes)
+    -   [Functions provided by the
+        package](#functions-provided-by-the-package)
+    -   [Description of the functions as they was created and
+        defined](#description-of-the-functions-as-they-was-created-and-defined)
+        -   [srwalkGenerator](#srwalkgenerator)
+        -   [srwalk](#srwalk)
+        -   [trwalkGenerator](#trwalkgenerator)
+        -   [trwalkGenerator](#trwalkgenerator-1)
+
 Random Walk R package (RandomWalk)
 ==================================
 

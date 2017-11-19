@@ -1,6 +1,8 @@
 ---
 output:
-  md_document: default
+  md_document:
+    toc: true
+    toc_depth: 3
   pdf_document:
     smart: false
   html_document:
@@ -255,4 +257,6 @@ Brownian motion:
                   ggplot2::aes(time_periods, brownian_motion_path)) +
   ggplot2::geom_point()
 ```   
+
+
  
