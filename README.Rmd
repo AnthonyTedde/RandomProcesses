@@ -32,36 +32,50 @@ output:
 
 ## Introduction
 
-The aim of this package is to provide a way to create and manipulate discrete 
-random walk and brownian motion or list of them. It would be noticed that the construction
-of brownian motion is made by taking the limit of the random walk as its step size
-goes to zero. The brownian motion could therefore be read as a continously stepped
-random walk.
+The aim of this package is to provide a way to create and manipulate either discrete 
+Random Walk or Brownian Motion or even list of them. It would be noticed that the construction
+of Brownian Motion is made by taking the limit of a Scaled Random Walk as its step size
+goes to zero. The Brownian Motion could therefore be read as a continously stepped
+Random Walk.
 
-By convention the step size of a random walk (with no scale defined) is 1.
-It means that at each time step the value of the random walk is likely to be
-the former one plus or minus 1.
-Moreover the step size of a Scaled Random Walk is defined by the following formula:
-1/sqrt(scale) = sqrt(scale)^(-1).
-In contrast of the Random Walk, the Brownian Motion has no natural computed step.
-Each value taken by its increments, from time t_k to t_l (with k < l) is randomly 
-calculated using the Normal Law with mean 0 and variance(t_l - t_k).
+By convention the _time step size_ of a Random Walk (with no scale defined) is 1.
+It means that the value of the Non-Scaled Random Walk updates each _time increment_
+of one.
+Furthermore the _increments_ of a *Non-Scaled (Unscaled) Random Walk* are either 1 or -1, 
+depending on chance (with a Symmetric Non-Scaled Random Walk, getting 1 or -1
+as increment is just as likely to occur.)
+All that preceed points out that at each time step the value of the random walk 
+is sure to be the former one plus or minus 1.
 
-As previously mentioned all caluculation could be made according to their properties. Among these available:
+Unlike the Unscaled Random Walk the _increments_ of a *Scaled Random Walk* is defined 
+by the following formula: $\sqrt{scale}^{-1}$.
+Further more its _time step size_ is no longer one but are defined by the value
+of _scale_ and is $\frac{time\_to\_maturity}{scale}$ 
 
-* Expectation and variance of random walk/brownian motion
+
+Finally and Also in contrast with the Scaled / Unscaled Random Walk, 
+the *Brownian Motion* has neither natural _increments_ not _discrete time step_.
+Each value taken by its increments, from time $t_k$ to $t_l$ (with $k < l$) is 
+randomly computed using the Normal Law with $mean = 0$ and $variance = t_l - t_k$:
+$$N \sim \left(0, t_l - t_k \right)$$
+
+The package also implements some properties of the Random Walk and Brownian Motion
+Either to validate some test cases or directly for added functionalities.
+
+Among the following ones:
+
+* Expectation and variance of Random Walk/Brownian Motion
 * Expectation and variance of increments
-* Quadratic variation (source of the volatility computed path by path, where
-probabilities is not taken into account.)
+* *Quadratic Variation* (Source of the Black-Scholes-Merton volatility. Computed 
+  path by path, where probabilities are not taken into account.)
 
-(!) Quadratic variation can be thought as the volatility term of a random walk/
-brownian motion. Even if the special case of Brownian Motion and Random Walk
-incurs the same Quadratic Variation among all the different path.
+:exclamation: The special case of Brownian Motion and Random Walk is that they 
+incur _the same Quadratic Variation_ among all the different paths.
 
 ### Notes
 
-**For more technical information and example of usage** of the RandomWalk package, 
-please feel free to have a look inside the [vignettes](/vignettes) repository.
+**For more technical informations and example of usage** of the RandomWalk package, 
+feel free to have a look inside the [vignettes](/vignettes) repository.
 
 
 <!-- +++++++++++++++ New H2 +++++++++++++++ -->
@@ -69,13 +83,19 @@ please feel free to have a look inside the [vignettes](/vignettes) repository.
 
 ## Functions provided by the package
 
+### Key functions
+
 * Multiple Sampled Radom Walks generator: [srwalkGenerator](#srwalkgenerator)
 * Sampled Radom Walk constructor: [srwalk](#srwalk)
-* Theoretical Radom Walk: [trwalkGenerator](#trwalkgenerator)
+* Theoretical Radom Walk generator: [trwalkGenerator](#trwalkgenerator)
 * Multiple Brownian Motions generator: [sbmotionGenerator](#sbmotiongenerator)
 * Brownian Motion constructor: [sbmotion](#sbmotion)
-* Theoretical Radom Walk: [tbmotion]()
+* Theoretical Brownian Motion generator: [tbmotion]()
 * Quadratic Variation: [qvar](#qvar)
+
+### Getters and Setters
+* To use for retrieving a specific value of one the previous process: 
+  [get_values](get_values)
 
 
 <!-- +++++++++++++++ New h2 +++++++++++++++ --> 
@@ -83,89 +103,108 @@ please feel free to have a look inside the [vignettes](/vignettes) repository.
  
 ## Description of the functions as they was created and defined
 
-The following lines does not fully give a set of examples of usage 
+The following lines do not fully give a bunch of examples of usage 
 of the package functions.
-<!-- To get a useful bunch of that.. One can refers to "Example" folder. -->
+
 Instead of giving such examples, they provide an brief description of the arguments 
 the package functions take as well as the way these agruments are defined (along
 with the default value they take)
 
  
+<!-- +++++++++++++++ New h3 +++++++++++++++ --> 
+<!-- +++++++++++++++ srwalkGenerator +++++++++++++++ --> 
  
 ### srwalkGenerator
 
+#### Summary
 
-#### Definition
-
-```{r}
-# anonymous <- function(x){
-#   # print(paste0("formals(srwalk)$", names(x)))
-#   # c(names(x),
-#   # eval(parse(text = paste0("formals(srwalk)$", names(x)))))
-#   rbind(x)
-# }
-# sapply(c(names(formals(srwalk)), formals(srwalk)), FUN = anonymous)
-```
-
-| Arguments | Default | Description |
-|---|---|---|
-| time_to_maturity | 100 | Final time up to the random walk goes |
-| prob | 0.5 | Probability of occurence of head and tail for each step |
-| scale | 1 | Define the partition of the time period. and the scale of up and down factors of the random walk, following the rule: sqrt(scale)^(-1)|
-| seed | 1 | The seed fixes initial value of the pseudo random number generation |
-| n | 1 | Number of random walk generated by the function |
-
-This function return a R *list* of multiple *data.frame*s. Each one contains
+This function return a R _list_ of multiple _data.frame_ s. Each one contains
 the following variables:
 
-1. *time_period*: Ordered vector from 0 up to T(time_to_maturity). It represents 
-  the time period in which the random walk evolved. The partition step of this vector
-  depends on the variable *scale*.
-2. *random_walk_path*: All random values taken by the sampled random walk.  
+1. *time_periods*: Ordered vector from 0 up to T(time_to_maturity). It represents 
+  a partition of the period of time where the random walk evolved. 
+  The partition step of this vector depends on the variable _scale_.
+1. *random_walk_path*: Provides all the random values taken by the sampled 
+    random walk.  
 
 
+#### Arguments
+ 
+| Arguments | Default | Description |
+|---|---|---|
+| time_to_maturity | 100 | Final time up to the Random Walk goes |
+| prob | 0.5 | Probability of occurence of head and tail for each step |
+| scale | 1 | Define the partition of the time period and the scale of up and down factors of the increments, following the rule: $\sqrt{scale}^{-1}$|
+| seed | 1 | It fixes initial value of the pseudo random number generation in order to get reproducible experiments. |
+| n | 1 | Number of Random Walk generated by the function |
 
+  
 #### Example of usage
 
-```{r}
+```{r message=FALSE, error=FALSE}
 library(RandomWalk)
 # The following line set the variable @sampled with a list of 20
 # data.frame of Adapted random walk.
-Sampled <- srwalkGenerator(time_to_maturity = 500, n = 20)
+Sampled <- srwalkGenerator(time_to_maturity = 500, 
+                           seed = 7,
+                           n = 20)
 ```
 
+The previous Sampled Random Walks could be reduce to its graphical representation:
+
+```{r message=FALSE, error=FALSE}
+ggplot2::ggplot(dplyr::bind_rows(Sampled, .id = "uid")
+                , ggplot2::aes(x = time_periods, 
+                               y = random_walk_path,
+                               group = uid)) +
+ggplot2::geom_line(alpha = .5) + 
+ggplot2::labs(title = "Random Walk paths from multiple random experiments", 
+              caption = "Random Walks",
+              x = 'Time periods',
+              y = 'Random Walk')
+```
   
 
+<!-- +++++++++++++++ New h3 +++++++++++++++ --> 
 <!-- +++++++++++++++ srwalk description +++++++++++++++ --> 
-### srwalk
- 
+#### Summary
 
-| Arguments | Default | Description |
-|---|---|---|
-| time_to_maturity | 100 | Final time up to the random walk goes |
-| prob | 0.5 | Probability of occurence of head and tail for each step |
-| scale | 1 | Define the partition of the time period. The scale of up and down factors of the random walk follows the rule: $sqrt(scale)^{-1}$ |
-| seed | 1 | The seed fixes initial value of the pseudo random number generation |
-  
-This function is defined to be the constructor of a unique Sampled Random Walk.
-It returns a uniq S3 object with classes as follow:
+This function is defined to be the constructor of a unique Sampled Random Walk. 
+It returns a unique S3 object with classes as follow:
 
 ```{R echo=FALSE}
 c("sampled_randomwalk", "data.frame")
 ```
  
-srwalk() output a data.frame which contains each step of the time value along 
-with the associated Sampled Random Walk value.
+srwalk() outputs a data.frame which contains each time value step along 
+with the associated Sampled Random Walk value, arranged as follow:
+
+1. *time_periods*: Ordered vector from 0 up to T(time_to_maturity). It represents 
+  a partition of the period of time where the random walk evolved. 
+  The partition step of this vector depends on the variable _scale_.
+1. *random_walk_path*: Provides all the random values taken by the sampled 
+    random walk.  
 
 
-
+#### Arguments
+ 
+| Arguments | Default | Description |
+|---|---|---|
+| time_to_maturity | 100 | Final time up to the Random Walk goes |
+| prob | 0.5 | Probability of occurence of head and tail for each step |
+| scale | 1 | Define the partition of the time period and the scale of up and down factors of the increments, following the rule: $\sqrt{scale}^{-1}$|
+| seed | 1 | It fixes initial value of the pseudo random number generation in order to get reproducible experiments. |
+| n | 1 | Number of Random Walk generated by the function |
+ 
+  
 #### Example of usage
+
 ```{r echo=TRUE}
 library(RandomWalk)
-# Generate a 150 steps symmetric random walk
+# Generate a 150 steps Unscale Symmetric Random Walk
 srw <- srwalk(time_to_maturity =  150)
 ``` 
-  
+
   
 ```{r echo=FALSE, message=FALSE, warning=FALSE, error=FALSE}
 library(knitr)
@@ -177,6 +216,10 @@ kable(head(srw))
 
 
 <!-- +++++++++++++++ srwalkGenerator description +++++++++++++++ --> 
+<!-- +++++++++++++++ HERE +++++++++++++++ --> 
+<!-- +++++++++++++++ HERE +++++++++++++++ --> 
+<!-- +++++++++++++++ HERE +++++++++++++++ --> 
+<!-- +++++++++++++++ HERE +++++++++++++++ --> 
 ### trwalkGenerator
  
 
