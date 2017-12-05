@@ -14,5 +14,6 @@ Suggests: knitr,
     rmarkdown,
     ggplot2,
     dplyr,
-    testthat
+    testthat,
+    cubature
 VignetteBuilder: knitr 

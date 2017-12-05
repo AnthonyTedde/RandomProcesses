@@ -26,30 +26,3 @@ joint_density <- function( x, t){
   (1/ (sqrt(((2 * pi) ^ n) * d))) * exp( ((-1/2) %*% rbind(x)) %*% matrixcalc::matrix.inverse(cov_mat) %*% cbind(x) )
 
 }
-
-
-# Following code must be added to the test cases:
-#
-# x <- c(0, 0)
-# t <- c(.1, .2)
-#
-# joint_density(t = c(.1, .2), x = c(0, 0))
-# joint_density(t = c(.1, .2), x = c(1, 0))
-#
-# library(cubature)
-# low <- rep(-100, 2)
-# up <- rep(100, 2)
-# hcubature(joint_density, low, up,  t = c(0.1, 0.2))
-#
-#
-# library(R2Cuba)
-# str(cuhre(ndim = 2, ncomp = 1, joint_density, t = c(0.1,0.2), lower = c(-100, -100), upper = rep(100, 2)))
-# cuhre(ndim = 10, ncomp = 1, joint_density, t = 1:10, lower = rep(-10, 10), upper = rep(10, 10))
-#
-# a <- cuhre(ndim = 1, ncomp = 1, joint_density, t = 1:1, lower = rep(-1, 1), upper = rep(1, 1))$value
-# b <- cuhre(ndim = 2, ncomp = 1, joint_density, t = c(0.1,0.2), lower = c(-100, -100), upper = rep(100, 2))$value
-#
-#
-# low <- rep(-4, 2)
-# up <- rep(4, 2)
-# hcubature(joint_density, low, up, t = 1:2)
