@@ -12,7 +12,7 @@ test_that("joint density has 1 as full density", {
   integral <- R2Cuba::cuhre(ndim = 2,
                             ncomp = 1,
                             joint_density,
-                            t = c(0.1,0.2),
+                            time = c(0.1,0.2),
                             lower = lower_bound,
                             upper = upper_bound,
                             flags = list(verbose = 0))
