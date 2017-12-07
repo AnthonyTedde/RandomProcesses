@@ -32,4 +32,18 @@ joint_density <- function(time){
   }
 }
 
-vector_of_time <- seq(0, 4, by = 0.02)
+# vector_of_time <- seq(0.01, 5, by = 0.01)
+# vector_of_time <- seq(0.01, 5, length.out = 2)
+# time <- vector_of_time
+# anonymous <- function(row, col){ifelse(row < col, row, col)}
+# cov_mat <- outer(time, time, FUN = anonymous)
+# det(cov_mat)
+#
+# f <- joint_density(vector_of_time)
+# R2Cuba::cuhre(2,
+#               1,
+#               f,
+#               lower = rep(-Inf, 2),
+#               upper = rep(Inf, 2),
+#               flags = list(verbose = 0))
+
