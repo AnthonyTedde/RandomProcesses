@@ -34,3 +34,14 @@ test_that("With same seed but different scale, Brownian Motion should be reprodu
   bm2 <- sbmotion(time_to_maturity = 4, scale = 200)
   expect_equal(bm1, bm2[seq(1, nrow(bm2), by = 2), ])
 })
+
+
+## Reproducible Brownian Motion
+test_that("Brownian motion should be a reproducible function", {
+  time1 <- seq(0, 4, by = 0.1)
+  time2 <- seq(0, 4, by = 0.05)
+
+  bm1 <- sapply(time1, get_sbmotion_point())
+  bm2 <- sapply(time2, get_sbmotion_point())[seq(1, length(time2), by = 2)]
+  expect_equal(bm1, bm2)
+})
