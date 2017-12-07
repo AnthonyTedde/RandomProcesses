@@ -7,7 +7,7 @@
 #' @param t vector of time
 #' @param x Vector of dummy variables
 #' @export
-joint_density <- function( x, time){
+joint_density <- function(time){
 
   # In order to use the jointly normally distribution formula, the computation
   # of the covariance matrices:
@@ -25,7 +25,11 @@ joint_density <- function( x, time){
   d <- det(cov_mat)
 
   # Joint distribution equation
-  multiplier <- (1/ (sqrt(((2 * pi) ^ n) * d)))
-  X <-  ((-1/2) %*% rbind(x)) %*% cov_mat_inv %*% cbind(x)
-  multiplier * exp(X)
+  function(x){
+    multiplier <- (1/ (sqrt(((2 * pi) ^ n) * d)))
+    X <-  ((-1/2) %*% rbind(x)) %*% cov_mat_inv %*% cbind(x)
+    multiplier * exp(X)
+  }
 }
+
+vector_of_time <- seq(0, 4, by = 0.02)
