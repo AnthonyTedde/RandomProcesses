@@ -6,10 +6,9 @@ sbmotionGenerator <- function(time_to_maturity = 4,
                                        'tail' = 1/2),
                               seed = 1,
                               scale = 100,
-                              n = 1){
-  # In order to get reproducible result, the seed is previously set according
-  # to the <<seed>> param
-  set.seed(seed)
+                              n = 1,
+                              reproducible = F){
+
   time_upper_bound <- time_to_maturity * scale
   time_interval <- 1/scale
 
@@ -21,20 +20,31 @@ sbmotionGenerator <- function(time_to_maturity = 4,
   variance_increment <- deltaT
   sd_increment <- sqrt(variance_increment)
 
-  # Each value taken by the brownian motion agrees with the following properties
-  # of the increments of the brownian motion:
-  # E[increment] = 0
-  # var(increment) = delta(time)
-  anonymous <- function(x){
-     rnorm(n = time_upper_bound,
-           mean = 0,
-           sd = sd_increment)
-  }
-  normally_distributed_increment <- lapply(1:n, anonymous)
+  if(reproducible){
+    #
+    # time_step[-1] in order to remove time zero which is not random and will
+    # be added at the end of this script.
+    bm <- lapply(1:n, FUN = function(x) sapply(time_step[-1], get_sbmotion_point()))
+  }else{
+    #
+    # Else the properties of Increments are used
+    #
+    # Each value taken by the brownian motion agrees with the following properties
+    # of the increments of the brownian motion:
+    # E[increment] = 0
+    # var(increment) = delta(time)
+    set.seed(seed)
+    anonymous <- function(x){
+       rnorm(n = time_upper_bound,
+             mean = 0,
+             sd = sd_increment)
+    }
+    normally_distributed_increment <- lapply(1:n, anonymous)
 
-  bm <- lapply(normally_distributed_increment, FUN = function(i){
-    sapply(1:time_upper_bound, FUN = function(time) sum(i[1:time]))
-  })
+    bm <- lapply(normally_distributed_increment, FUN = function(i){
+      sapply(1:time_upper_bound, FUN = function(time) sum(i[1:time]))
+    })
+  }
 
   # As theorical lecture state: the brownian motion initial value is 0.
   # An interesting case TODO will be to implement brownian motion with another
