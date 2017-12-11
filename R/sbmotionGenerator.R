@@ -2,8 +2,6 @@
 #' @param seed - Define the seed sequence to alway get the same sampled
 #' randomly generated brownian motion.
 sbmotionGenerator <- function(time_to_maturity = 4,
-                              prob = c('head' = 1/2,
-                                       'tail' = 1/2),
                               seed = 1,
                               scale = 100,
                               n = 1){
