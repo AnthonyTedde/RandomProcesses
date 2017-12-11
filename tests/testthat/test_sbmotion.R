@@ -29,9 +29,12 @@ test_that("With same seed, sampled generated brownian motion must be reproducibl
   expect_equal(sbmotion(seed = 4), sbmotion(seed = 4))
 })
 
+##
+## Use Brownian Bridge to get reproducible Brownian Motion.
+## TODO: Not yet Implemented.
 test_that("With same seed but different scale, Brownian Motion should be reproducible", {
-  bm1 <- sbmotion(time_to_maturity = 4, scale = 100, reproducible = T)
-  bm2 <- sbmotion(time_to_maturity = 4, scale = 200, reproducible = T)
+  bm1 <- sbmotion(time_to_maturity = 4, scale = 100)
+  bm2 <- sbmotion(time_to_maturity = 4, scale = 200)
   # Update the bm2 object such as it keeps the same generated data but
   # fits to the bm1's timeframe.
   bm2 <- bm2[seq(1, nrow(bm2), by = 2), ]

@@ -5,14 +5,12 @@ sbmotion <- function(time_to_maturity = 4,
                      prob = c('head' = 1/2,
                               'tail' = 1/2),
                      seed = 1,
-                     scale = 100,
-                     reproducible = F){
+                     scale = 100){
   sbmotionGenerator(time_to_maturity,
                     prob,
                     seed,
                     scale,
-                    1,
-                    reproducible)
+                    1)
 }
 
 #' Brownian motion pointwise generator
