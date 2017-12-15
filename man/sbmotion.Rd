@@ -4,8 +4,7 @@
 \alias{sbmotion}
 \title{Brownian motion generator}
 \usage{
-sbmotion(time_to_maturity = 4, prob = c(head = 1/2, tail = 1/2), seed = 1,
-  scale = 100, reproducible = F)
+sbmotion(time_to_maturity = 4, seed = 1, scale = 100)
 }
 \arguments{
 \item{seed}{- Define the seed sequence to alway get the same sampled

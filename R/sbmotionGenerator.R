@@ -18,9 +18,9 @@ sbmotionGenerator <- function(time_to_maturity = 4,
     sd_increment <- sqrt(variance_increment)
 
 
-    
+
     ## Else the properties of Increments are used
-    
+
     ## Each value taken by the brownian motion agrees with the following properties
     ## of the increments of the brownian motion:
     ## E[increment] = 0
@@ -33,9 +33,7 @@ sbmotionGenerator <- function(time_to_maturity = 4,
     }
     normally_distributed_increment <- lapply(1:n, anonymous)
 
-    bm <- lapply(normally_distributed_increment, FUN = function(i){
-        sapply(1:time_upper_bound, FUN = function(time) sum(i[1:time]))
-    })
+    bm <- lapply(normally_distributed_increment, cumsum)
 
     ## As theorical lecture state: the brownian motion initial value is 0.
     ## An interesting case TODO will be to implement brownian motion with another
@@ -47,7 +45,7 @@ sbmotionGenerator <- function(time_to_maturity = 4,
                   scale = scale)
     }
 
-    ## Simplify the output if the number of path =1. 
+    ## Simplify the output if the number of path =1.
     ## Overkill to provide a list of
     ## one data.frame. A uniq data.frame does the job
     brownianmotion <- structure(lapply(bm, anonymous),
