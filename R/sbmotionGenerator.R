@@ -1,56 +1,60 @@
 #' Brownian motion generator
+#'
 #' @param seed - Define the seed sequence to alway get the same sampled
+#' @param time_to_maturity
+#' @param scale
+#' @param n
 #' randomly generated brownian motion.
 sbmotionGenerator <- function(time_to_maturity = 4,
                               seed = 1,
                               scale = 100,
                               n = 1){
 
-    time_upper_bound <- time_to_maturity * scale
-    time_interval <- 1/scale
 
-    ## The time interval between each increment is needed in order to compute
-    ## the variance of these increments. According to the theory, the variance is
-    ## given by: var(W[t_i+1] - W[t_i]) = t_i+1 - t_i
-    time_step <- seq(0, time_to_maturity, by = time_interval)
-    deltaT <- time_step[-1] - time_step[-length(time_step)]
-    variance_increment <- deltaT
-    sd_increment <- sqrt(variance_increment)
+  ## Initialization of time variables.
+  time_lower_bound <- 0
+  time_upper_bound <- time_to_maturity * scale
+  time_interval <- 1/scale
+  time_step <- seq(0, time_to_maturity, by = time_interval)
+  deltaT <- time_step[-1] - time_step[-length(time_step)]
 
 
+  ## The time interval between each increment is needed in order to compute
+  ## the variance of these increments. According to the theory, the variance is
+  ## given by: var(W[t_i+1] - W[t_i]) = t_i+1 - t_i
+  variance_increment <- deltaT
+  sd_increment <- sqrt(variance_increment)
 
-    ## Else the properties of Increments are used
 
-    ## Each value taken by the brownian motion agrees with the following properties
-    ## of the increments of the brownian motion:
-    ## E[increment] = 0
-    ## var(increment) = delta(time)
-    set.seed(seed)
-    anonymous <- function(x){
-        rnorm(n = time_upper_bound,
-              mean = 0,
-              sd = sd_increment)
-    }
-    normally_distributed_increment <- lapply(1:n, anonymous)
+  ## Each value taken by the brownian motion agrees with the following properties
+  ## of the increments of the brownian motion:
+  ## E[increment] = 0
+  ## var(increment) = delta(time)
+  set.seed(seed)
 
-    bm <- lapply(normally_distributed_increment, cumsum)
+  normally_distributed_increment <- rep(list(rnorm(n = time_upper_bound,
+                                                   mean = 0,
+                                                   sd = sd_increment)), n)
 
-    ## As theorical lecture state: the brownian motion initial value is 0.
-    ## An interesting case TODO will be to implement brownian motion with another
-    ## initial value than 0.
-    anonymous <- function(bmotion){
-        structure(data.frame('time_periods' = time_step,
-                             'brownian_motion_path' = c(0,bmotion)),
-                  class = c('sampled_brownianmotion', class(data.frame())),
-                  scale = scale)
-    }
+  bm <- lapply(normally_distributed_increment, cumsum)
 
-    ## Simplify the output if the number of path =1.
-    ## Overkill to provide a list of
-    ## one data.frame. A uniq data.frame does the job
-    brownianmotion <- structure(lapply(bm, anonymous),
-                                class = c('sampled_brownianmotion', class(list())),
-                                scale = scale)
-    if (n == 1) brownianmotion[[1]]
-    else brownianmotion
+
+  ## As theorical lecture state: the brownian motion initial value is 0.
+  ## An interesting case TODO will be to implement brownian motion with another
+  ## initial value than 0.
+  anonymous <- function(bmotion){
+    structure(data.frame('time_periods' = time_step,
+                         'brownian_motion_path' = c(0,bmotion)),
+              class = c('sampled_brownianmotion', class(data.frame())),
+              scale = scale)
+  }
+
+  ## Simplify the output if the number of path =1.
+  ## Overkill to provide a list of
+  ## one data.frame. A uniq data.frame does the job
+  brownianmotion <- structure(lapply(bm, anonymous),
+                              class = c('sampled_brownianmotion', class(list())),
+                              scale = scale)
+  if (n == 1) brownianmotion[[1]]
+  else brownianmotion
 }
