@@ -26,8 +26,6 @@
 #' # The following give the value for brownian motion at time 2.01
 #' RandomWalk::get_values(bm, 2.01)
 #'
-#' @return \code{sbmotion()} outputs a data.frame that contains each step of the
-#'   time value along with the associated Sampled Brownian Motion value.
 #'
 #' @return \code{sbmotion()} outputs a \bold{data.frame} containing the whole
 #'   range of time period and the value of the corresponding Brownian Motion at
