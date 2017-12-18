@@ -52,10 +52,14 @@ sbmotionGenerator <- function(time_to_maturity = 4,
   ## var(increment) = delta(time)
   set.seed(seed)
 
+  ## The following genereates a list of n items. Each one containing vector of
+  ## numbers generated randomly according to the Normal Law N~(0, sd_increment)
   normally_distributed_increment <- rep(list(rnorm(n = time_upper_bound,
                                                    mean = 0,
                                                    sd = sd_increment)), n)
 
+  ## Cumulative sum of each vector of the previously created list in ordre to
+  ## capture the evolution of a cumulative process (Brownian Motion)
   bm <- lapply(normally_distributed_increment, cumsum)
 
 
@@ -69,9 +73,8 @@ sbmotionGenerator <- function(time_to_maturity = 4,
               scale = scale)
   }
 
-  ## Simplify the output if the number of path =1.
-  ## Overkill to provide a list of
-  ## one data.frame. A uniq data.frame does the job
+  ## Simplify the output if the number of path =1. It seems to be overkill to
+  ## provide a list of one data.frame. A unique data.frame does the job
   brownianmotion <- structure(lapply(bm, anonymous),
                               class = c('sampled_brownianmotion', class(list())),
                               scale = scale)
