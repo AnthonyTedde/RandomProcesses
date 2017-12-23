@@ -63,12 +63,7 @@ srwalkGenerator <- function(time_to_maturity = 100,
               prob = prob)
 
   Mk <- lapply(X, function(i){
-    c(0,
-      sapply(seq_along(i),
-             function(x){
-               sum(i[1:x]) * multiplier
-             })
-    )})
+    c(0, cumsum(i)) * multiplier})
 
   sampledRandomWalk <- as.data.frame(Mk)
 
