@@ -26,3 +26,8 @@ test_that("The generator provides the good value for scale attribute", {
   expect_equal(attributes(sbmotionGenerator(scale = 100))$scale, 100)
   expect_equal(attributes(sbmotionGenerator(scale = 100, n = 4))$scale, 100)
 })
+
+test_that("Differents Brownian Motion with different seed must be different", {
+  sampled <- sbmotionGenerator(n = 2)
+  expect_false(identical(sampled[[1]], sampled[[2]]))
+})
