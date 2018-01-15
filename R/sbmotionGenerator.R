@@ -55,12 +55,15 @@ sbmotionGenerator <- function(time_to_maturity = 4,
   ## The following genereates a list of n items. Each one containing vector of
   ## numbers generated randomly according to the Normal Law N~(0, sd_increment)
   number_of_occurence <- time_upper_bound * n
-  normally_distributed_increment_v <- rnorm(n = number_of_occurence,
-                                            mean = 0,
-                                            sd = sd_increment)
-  normally_distributed_increment <-  split(normally_distributed_increment_v,
-                                           ceiling(seq_along(
-                                             normally_distributed_increment_v) / time_upper_bound ))
+
+  library(purrr)
+  # purrr package is loaded to use the operator '%>%'
+  # See also: magrittr::'%>%' and dplyr::'%>%'
+  #
+  normally_distributed_increment <-  rnorm(n = number_of_occurence,
+                                           mean = 0,
+                                           sd = sd_increment) %>%
+    split(ceiling(seq_along(.) / time_upper_bound ))
 
   ## Cumulative sum of each vector of the previously created list in ordre to
   ## capture the evolution of a cumulative process (Brownian Motion)

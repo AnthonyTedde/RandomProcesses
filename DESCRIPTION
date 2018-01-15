@@ -17,3 +17,4 @@ Suggests: knitr,
     testthat,
     cubature
 VignetteBuilder: knitr 
+Imports: purrr
