@@ -1,7 +1,7 @@
 #' @title A generator of Sampled Brownian Motion
 #'
 #'
-#' @description  It generates multiple (n) Sampled Brownian Motions along with
+#' @description  It generates multiple (n) Sampled Brownian Motions - Wiener Process) along with
 #'   the appropriate time period. The time period goes from 0 up to T (0:
 #'   time_to_maturity).
 #'
@@ -54,9 +54,13 @@ sbmotionGenerator <- function(time_to_maturity = 4,
 
   ## The following genereates a list of n items. Each one containing vector of
   ## numbers generated randomly according to the Normal Law N~(0, sd_increment)
-  normally_distributed_increment <- rep(list(rnorm(n = time_upper_bound,
-                                                   mean = 0,
-                                                   sd = sd_increment)), n)
+  number_of_occurence <- time_upper_bound * n
+  normally_distributed_increment_v <- rnorm(n = number_of_occurence,
+                                            mean = 0,
+                                            sd = sd_increment)
+  normally_distributed_increment <-  split(normally_distributed_increment_v,
+                                           ceiling(seq_along(
+                                             normally_distributed_increment_v) / time_upper_bound ))
 
   ## Cumulative sum of each vector of the previously created list in ordre to
   ## capture the evolution of a cumulative process (Brownian Motion)
