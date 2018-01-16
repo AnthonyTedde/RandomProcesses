@@ -25,6 +25,8 @@
 #'
 #'
 #' @export
+#'
+#' @importFrom magrittr %>%
 sbmotionGenerator <- function(time_to_maturity = 4,
                               seed = 1,
                               scale = 100,
@@ -56,10 +58,7 @@ sbmotionGenerator <- function(time_to_maturity = 4,
   ## numbers generated randomly according to the Normal Law N~(0, sd_increment)
   number_of_occurence <- time_upper_bound * n
 
-  library(purrr)
-  # purrr package is loaded to use the operator '%>%'
-  # See also: magrittr::'%>%' and dplyr::'%>%'
-  #
+  # See import magrittr::'%>%' (and  also dplyr::'%>%', purrr::%>%)
   normally_distributed_increment <-  rnorm(n = number_of_occurence,
                                            mean = 0,
                                            sd = sd_increment) %>%

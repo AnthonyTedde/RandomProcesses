@@ -16,5 +16,4 @@ Suggests: knitr,
     dplyr,
     testthat,
     cubature
-VignetteBuilder: knitr 
-Imports: purrr
+VignetteBuilder: knitr  

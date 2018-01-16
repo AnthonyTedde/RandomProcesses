@@ -24,7 +24,7 @@ Each data.frame in the list contains the whole range of time period and
 the value of the corresponding Brownian Motion at that time.
 }
 \description{
-It generates multiple (n) Sampled Brownian Motions along with
+It generates multiple (n) Sampled Brownian Motions - Wiener Process) along with
   the appropriate time period. The time period goes from 0 up to T (0:
   time_to_maturity).
 }

@@ -17,9 +17,6 @@ provides reproducibles experiments.}
 instance if the scale is 100, the time step [0,1] will be cut in 100 parts.}
 }
 \value{
-\code{sbmotion()} outputs a data.frame that contains each step of the
-  time value along with the associated Sampled Brownian Motion value.
-
 \code{sbmotion()} outputs a \bold{data.frame} containing the whole
   range of time period and the value of the corresponding Brownian Motion at
   that time.
@@ -40,6 +37,7 @@ bm <- sbmotion(time_to_maturity = 4, scale = 100)
 # Use the accessor to get values:
 # The following give the value for brownian motion at time 2.01
 RandomWalk::get_values(bm, 2.01)
+
 
 }
 \references{
