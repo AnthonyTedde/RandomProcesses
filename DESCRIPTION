@@ -1,6 +1,6 @@
-Package: RandomWalk
+Package: RandomProcesses
 Type: Package
-Title: Generate Random Walks
+Title: Random Processes
 Version: 0.0.0.9000
 Date: 2017-10-19
 Author@R: person('Anthony', 'Tedde', email = 'antho.tedde@gmail.com',
