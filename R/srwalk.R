@@ -3,9 +3,9 @@
 #'
 #' @description It generates a zoo object of sample scaled Random Walks
 #' along with the associated time periods.
-#' Time period goes from  `start` to `stop`. If no stop date is provided,
-#' it is computed based on the argument `tau`, such as:
-#' `stop` <- `start` + `tau`, with `tau` expressed in days.
+#' Time period goes from  `from` to `stop`. If no stop date is provided,
+#' it is computed based on the argument `to`, such as:
+#' `stop` <- `from` + `to`, with `to` expressed in days.
 #'
 #'
 #' @inheritParams trwalk
@@ -22,7 +22,7 @@
 #'
 #' @return \code{srwalk()} output a zoo object containing some random walks.
 #' The so generated random walks are independent and indentically distributed.
-#' All share the same start and stop date.
+#' All share the same from and stop date.
 #'
 #'
 #' @references
@@ -30,47 +30,39 @@
 #'
 #'
 #' @export
-srwalk <- function(start = Sys.Date(),
-                   tau = 365,
-                   stop = F,
-                   prob = c('head' = 0.5, 'tail' = 0.5),
+
+srwalk <- function(from = Sys.Date(),
+                   to,
+                   len = 365,
+                   prob = .5,
                    interval = 'day',
                    seed = 1,
                    n = 1){
 
   set.seed(seed)
-  if (!lubridate::is.Date(stop))
-    stop <- start + tau
+  if (missing(to)) to <- from + len
 
-  # set the whole time partition ----------------------------
-  partition <- seq(from = start,
-                   to = stop,
+  partition <- seq(from = from,
+                   to = to,
                    by = interval)
 
-
-  # Define the multiplier ----------------------------
-  # The multiplier is equal to sqrt of time in order to get a normal distribution
-  # with expectation of zero (defined by the symmetry of head and tail probability)
-  # and a standard deviation of square root of time (defined by the multiplier)
   multiplier <- sqrt(as.numeric(diff(partition)))
 
-  # Construction of the random variable ----------------------------
-  x <- rep(list(c(-1, 1)), n)
+  # 1: head, -1: tail
+  x <- rep(list(c(1, -1)), n)
 
   X <- lapply(x, sample,
               size = length(multiplier),
               replace = T,
-              prob = prob)
+              prob = c(prob, 1-prob))
 
-  # c(0, ...) because the initial value of a random walk is zero.
-  sampledRandomWalk <- structure(purrr::map(X, ~c(0, cumsum(.x) * multiplier)),
-                                 names = 1:length(X))
-
-  # Construction the time series objects ----------------------------
-  randomwalk <- zoo::zoo(
-    tibble::as.tibble(sampledRandomWalk), order.by = partition
+  sampledRandomWalk <- structure(
+    lapply(X, FUN = function(x){c(0, cumsum(x) * multiplier)}),
+    names = paste0("P",
+                   stringr::str_pad(1:length(X),
+                                    width = length(X),
+                                    pad = "0"))
   )
 
-  # Return the object ----------------------------
-  randomwalk
+  zoo::zoo(data.frame(sampledRandomWalk), order.by = partition)
 }

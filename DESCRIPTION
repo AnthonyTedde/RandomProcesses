@@ -5,12 +5,16 @@ Version: 0.0.0.9000
 Date: 2017-10-19
 Author@R: person('Anthony', 'Tedde', email = 'antho.tedde@gmail.com',
                 role = c('aut', 'cre'))
-Description: In first place it provides possibility to generate random walk.
+Description: The package provide generators for random processes timeseries.
+Depends: R (>= 3.6.0)
 License: GPL-2
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
-Suggests: knitr,
+Imports: 
+    stringr
+Suggests: 
+    knitr,
     rmarkdown,
     ggplot2,
     dplyr,
