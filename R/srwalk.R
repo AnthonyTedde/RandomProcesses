@@ -69,9 +69,11 @@ srwalk <- function(n = 1,
   sampledRandomWalk <- structure(
     lapply(X, FUN = function(x){c(0, cumsum(x) * multiplier)}),
     names = paste0("P",
-                   stringr::str_pad(1:length(X),
-                                    width = length(X),
-                                    pad = "0"))
+                   stringr::str_pad(
+                     1:length(X),
+                     width = floor(log(length(X), base = 10)) + 1,
+                     pad = "0")
+                   )
   )
 
   zoo::zoo(data.frame(sampledRandomWalk), order.by = partition)
